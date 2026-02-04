@@ -1,0 +1,2763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lakshmiharam Builders – Responsive GSAP Hero</title>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+ background: url("https://srisuryaconstructions.com/images/contact/contact_bg_1.webp") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position: absolute;
+  inset: 0;
+  background-image: url("images/house_warming.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.15); /* GSAP zoom ku safe */
+  will-change: transform;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+}
+
+.hero-content{
+  position:relative;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  padding:20px;
+}
+
+/* TEXT BOX */
+.text-box{
+  position:relative;
+  padding:40px 60px;
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+}
+
+/* COMMON CORNER STYLE */
+.corner{
+  position:absolute;
+  width:140px;
+  height:140px;
+  pointer-events:none;
+}
+
+/* HORIZONTAL & VERTICAL LINES */
+.corner .h,
+.corner .v{
+  position:absolute;
+  background:#ffffff;
+}
+
+/* Horizontal line */
+.corner .h{
+  height:1px;
+  width:0; /* GSAP animate */
+}
+
+/* Vertical line */
+.corner .v{
+  width:1px;
+  height:0; /* GSAP animate */
+}
+
+/* 🔹 TOP LEFT CORNER */
+.corner.tl{
+  top:0;
+  left:0;
+}
+
+.corner.tl .h{
+  top:0;
+  left:0;
+}
+
+.corner.tl .v{
+  top:0;
+  left:0;
+}
+
+/* 🔹 BOTTOM RIGHT CORNER */
+.corner.br{
+  bottom:0;
+  right:0;
+}
+
+.corner.br .h{
+  bottom:0;
+  right:0;
+}
+
+.corner.br .v{
+  bottom:0;
+  right:0;
+}
+
+/* TEXT STYLES */
+h1{
+  font-weight:400;
+  color:#fff;
+  margin-bottom:14px;
+  line-height:1.2;
+}
+
+p{
+  font-size: 16px;
+  letter-spacing:1.5px;
+  color:#fff;
+}
+
+/* 📱 MOBILE OPTIMIZATION */
+@media (max-width:768px){
+  .text-box{
+    padding:24px 20px;
+  }
+
+  .corner{
+    width:90px;
+    height:90px;
+  }
+
+  p{
+    letter-spacing:1px;
+  }
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/* ------------------------------
+   HERO SECTION
+------------------------------ */
+.hero-section,
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===============================
+   SECTION BRIDGE (REPLACES WHITE GAP)
+================================ */
+
+.project-slider.reveal-section::before {
+  content: "";
+  position: absolute;
+  top: -160px;
+  left: 0;
+  width: 100%;
+  height: 180px;
+
+  /* transparent gradient */
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.55) 40%,
+    rgba(255,255,255,1) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ------------------------------
+   SLIDER STRUCTURE
+------------------------------ */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+}
+
+/* ------------------------------
+   CENTER CONTENT
+------------------------------ */
+.slider-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.slider-content h2 {
+  font-weight: 500;
+}
+
+.slider-content p {
+  margin-top: 10px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* ------------------------------
+   DOT NAVIGATION
+------------------------------ */
+.slider-nav {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 6;
+}
+
+.slider-nav .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+}
+
+.slider-nav .dot.active {
+  background: #fff;
+}
+
+/* ------------------------------
+   MOBILE RESPONSIVE
+------------------------------ */
+@media(max-width:768px){
+  .project-slider.reveal-section{
+    margin-top: -80px;
+    padding-top: 140px;
+    border-radius: 32px 32px 0 0;
+  }
+
+  .slider-wrapper{
+    height: 70vh;
+  }
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/* ========== HERO SECTION ========== */
+.hero-section{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1600 / 896; /* 🔥 same size for all images */
+  overflow: hidden;
+}
+
+
+.hero-content h1{
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.hero-content p{
+  margin-top: 14px;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+/* ========== LEFT MENU ========== */
+.hero-menu{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 80px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-menu ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.hero-menu a{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+
+  transition: all 0.3s ease;
+}
+
+.hero-menu a:hover,
+.hero-menu a.active{
+  color: #fff;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/* ---------------- DESKTOP DEFAULT ---------------- */
+.menu-toggle,
+.mobile-menu {
+  display: none;
+}
+
+/* ---------------- MOBILE & TABLET ---------------- */
+@media (max-width: 1024px) {
+
+  /* hide side hero menu */
+  .hero-menu {
+    display: none;
+  }
+
+  /* hamburger button */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: fixed;
+    top: 22px;
+    left: 20px;
+    z-index: 1001;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    transition: 0.4s;
+  }
+
+  /* full screen menu */
+  .mobile-menu {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  /* GLASS EFFECT */
+  background: linear-gradient(
+    120deg,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.25)
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateX(-100%);
+}
+
+.mobile-menu a {
+  color: #fff;
+  text-shadow: 0 6px 25px rgba(255,255,255,0.35);
+}
+
+  .mobile-menu ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+  }
+
+  .mobile-menu li {
+    margin: 24px 0;
+  }
+
+  .mobile-menu a {
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: 300;
+  }
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+
+.hero-logo{
+  position: absolute;
+  top: -300px;                 /* hero bottom gap */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;         /* click disturb aagama */
+}
+
+.hero-logo img{
+  width: 90px;                  /* desktop size */
+  height: auto;
+  opacity: 0.95;
+
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.4));
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .hero-logo img{
+    width: 70px;
+  }
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+.projects-section {
+  position: relative;
+  padding: 100px 20px;
+  background: rgba(255, 255, 255, 0.88); /* 👈 white transparent */
+  backdrop-filter: blur(2px);           /* subtle premium look */
+}
+
+/* HEADER */
+
+.projects-header {
+  text-align: center;
+  max-width: 900px;
+  margin: auto;
+}
+
+.projects-title span{
+  color: #eebf33;
+  position: relative;
+}
+
+.projects-title span::after {
+  content: "";
+  position: absolute; 
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 4px;
+  background: #eebf33;
+  border-radius: 4px;
+}
+
+.projects-subtitle {
+  margin-top: 50px;
+  font-size: 20px;
+  color: var(--grey);
+}
+
+.projects-desc {
+  margin-top: 25px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--grey);
+}
+
+/* CATEGORY GRID */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin: 100px 0;
+}
+
+.category-card {
+  position: relative;
+  border-top: 5px solid var(--yellow);
+  transition: all 0.35s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(244,196,48,0.25);
+}
+
+.category-card h3 {
+  margin-bottom: 15px;
+}
+
+.category-card p {
+  font-size: 16px;
+  color: var(--grey);
+  line-height: 1.7;
+}
+
+/* GALLERY */
+
+.gallery {
+  max-width: 1100px;
+  margin: 40px auto 120px;
+}
+
+.gallery h4 {
+  position: relative;
+  display: inline-block;
+}
+
+.gallery h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 50%;
+  height: 3px;
+  background: var(--yellow);
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.image-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.image-grid img {
+  transition: all 0.35s ease;
+}
+
+.image-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(244,196,48,0.35);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-title {
+    font-size: 42px;
+  }
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.icon-box {
+  width: 54px;
+  height: 54px;
+  background: var(--yellow);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+.image-grid img {
+  border-radius: 16px;
+  border: 3px solid transparent;
+}
+
+.image-grid img:hover {
+  border-color: var(--yellow);
+}
+
+.category-grid {
+  max-width: 1200px;
+  margin: 80px auto 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.category-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 38px 32px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+}
+
+.icon-box {
+  width: 56px;
+  height: 56px;
+  background: #f4c430; /* Yellow */
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.category-card h3 {
+  color: #2c2c2c;
+  margin-bottom: 12px;
+}
+
+.category-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CATEGORY GRID */
+.category-grid {
+  max-width: 1100px;
+  margin: 80px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* CARD */
+.category-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  border-top: 5px solid #f4b400; /* yellow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ICON */
+.icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #f4b400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+/* TEXT */
+.category-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.category-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* HOVER (SUBTLE) */
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.08);
+}
+
+.section-heading-wrapper {
+  overflow: hidden; /* slide clean */
+}
+/*--------------------------------------------------------------------------------------------------------------*/
+.footer-cta {
+  background: #1c1f22;
+  color: #fff;
+  padding: 80px 6%;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+.footer-left {
+  max-width: 520px;
+}
+
+.footer-icon {
+  width: 55px;
+  height: 55px;
+  background: #f5c400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.footer-icon i {
+  color: #fff;
+  font-size: 22px;
+}
+
+.footer-left h2 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.footer-left p {
+  color: #bbb;
+  line-height: 1.6;
+}
+
+.footer-social {
+  margin-top: 25px;
+  display: flex;
+  gap: 14px;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #f5c400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.footer-social a:hover {
+  background: #f5c400;
+}
+
+.footer-bottom {
+  margin-top: 70px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.footer-item {
+  flex: 1;
+  color: #ccc;
+}
+
+.footer-item i {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #f5c400;
+}
+
+.footer-keywords {
+  margin-top: 70px;
+}
+
+.footer-keywords h4 {
+  color: #ccc;
+  font-size: 15px;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.keyword-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.keyword-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.keyword-grid li {
+  color: #bdbdbd;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-brand {
+  margin: 70px 0 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.footer-brand h2 {
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: #ccc;
+}
+
+.footer-brand h2 strong {
+  color: #f5c400;
+}
+
+.footer-copy {
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  padding-bottom: 25px;
+}
+
+.footer-copy a {
+  color: #f5c400;
+  text-decoration: none;
+}
+
+.brand-line {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+}
+
+.brand-anim {
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f5c400,
+    #ffe27a,
+    #f5c400,
+    transparent
+  );
+  z-index: 2;
+  box-shadow: 0 0 6px rgba(245,196,0,0.7),
+              0 0 12px rgba(245,196,0,0.4);
+}
+.footer-map img {
+  width: 380px;
+  height: 260px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #111; /* optional */
+  padding: 30px;    /* optional */
+}
+.footer-item a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-item i {
+  font-size: 30px;              /* 🔥 bigger icons */
+  margin-bottom: 8px;
+  color: #f5c400;
+  transition: 0.3s ease;
+}
+
+.footer-item p {
+  font-size: 14px;
+}
+
+.footer-item a:hover i,
+.footer-item a:hover p {
+  color: #f5c400;
+}
+
+/* VERTICAL DIVIDER */
+.footer-divider {
+  position: relative;
+  width: 2px;
+  height: 70px;
+  background: rgba(255,255,255,0.25);
+  overflow: hidden;
+}
+
+.divider-anim {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    #f5c400,
+    #ffdf5d,
+    #f5c400,
+    transparent
+  );
+  box-shadow: 0 0 10px rgba(245,196,0,0.9);
+}
+
+/* =====================================
+   FOOTER – MOBILE RESPONSIVE (GLOBAL)
+   DO NOT REMOVE – USED IN ALL PAGES
+===================================== */
+@media (max-width: 768px) {
+  .footer-cta {
+    padding: 60px 16px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-left {
+    max-width: 100%;
+  }
+
+  .footer-icon {
+    margin: 0 auto 20px;
+  }
+
+  .footer-left h2 {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  .footer-left p {
+    font-size: 15px;
+  }
+
+  .footer-social {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  .footer-item {
+    text-align: center;
+  }
+
+  .footer-keywords {
+    margin-top: 50px;
+  }
+
+  .footer-keywords h4 {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .keyword-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    flex-direction: column;
+    gap: 12px;
+    margin: 50px 0 25px;
+  }
+
+  .brand-line {
+    width: 100%;
+    display: block;
+  }
+
+  .footer-brand h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    padding: 0 10px;
+    line-height: 1.6;
+  }
+}
+/*--------------------------------------------------------------------------------------------------------------*/
+@media (max-width:768px){
+  body{
+    overflow-x:hidden;
+  }
+
+  section{
+    padding-left:6vw !important;
+    padding-right:6vw !important;
+  }
+}
+
+@media (max-width:768px){
+
+  .hero,
+  .hero-section{
+    height:100svh;
+  }
+
+  .text-box{
+    padding:24px 18px;
+  }
+
+  .corner{
+    width:70px;
+    height:70px;
+  }
+
+  .hero-logo{
+    bottom:16px;
+  }
+
+  .hero-logo img{
+    width:64px;
+  }
+}
+
+@media (max-width:768px){
+  .projects-header{
+    padding-top:60px;
+  }
+
+  .projects-subtitle{
+  font-size: 16px;
+  }
+
+  .projects-desc{
+  font-size: 16px;
+    line-height:1.7;
+  }
+}
+
+@media (max-width:768px){
+  .category-grid{
+    grid-template-columns:1fr !important;
+    gap:24px;
+    margin:60px auto;
+  }
+
+  .category-card{
+    padding:26px 22px;
+  }
+}
+
+/*---------------------------------------------------------*/
+/* ========== LEFT MENU ========== */
+.hero-menu{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 80px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 99999;
+}
+.hero-menu ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.hero-menu a{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+
+  transition: all 0.3s ease;
+}
+
+.hero-menu a:hover,
+.hero-menu a.active{
+  color: #fff;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/* ---------------- DESKTOP DEFAULT ---------------- */
+.menu-toggle,
+.mobile-menu {
+  display: none;
+}
+
+/* ---------------- MOBILE & TABLET ---------------- */
+@media (max-width: 1024px) {
+
+  /* hide side hero menu */
+  .hero-menu {
+    display: none;
+  }
+
+  /* hamburger button */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: fixed;
+    top: 22px;
+    left: 20px;
+    z-index: 1001;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    transition: 0.4s;
+  }
+
+  /* full screen menu */
+  .mobile-menu {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  /* GLASS EFFECT */
+  background: linear-gradient(
+    120deg,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.25)
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateX(-100%);
+}
+
+.mobile-menu a {
+  color: #fff;
+  text-shadow: 0 6px 25px rgba(255,255,255,0.35);
+}
+
+  .mobile-menu ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+  }
+
+  .mobile-menu li {
+    margin: 24px 0;
+  }
+
+  .mobile-menu a {
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: 300;
+  }
+}
+
+.hero-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;        /* side nav full height */
+  z-index: 99999;
+}
+
+/* ------------------------------
+   DOT NAVIGATION
+------------------------------ */
+.slider-nav {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.slider-nav .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+}
+
+.slider-nav .dot.active {
+  background: #696868;
+}
+.hero-menu a,
+.hero-menu a:hover,
+.hero-menu a:active,
+.hero-menu a:visited {
+  color: #f4c430;
+}
+
+.hero-menu a {
+  position: relative;
+  color: #eebf33;
+}
+
+.hero-menu a {
+  position: relative;
+  color: #eebf33;
+}
+
+.hero-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #f4c430;
+  transition: width 0.3s ease;
+}
+
+.hero-menu a:hover::after,
+.hero-menu a.active::after {
+  width: 100%;
+}
+
+/* ------------------------------
+   MOBILE RESPONSIVE
+------------------------------ */
+@media(max-width:768px){
+  .project-slider.reveal-section{
+    margin-top: -80px;
+    padding-top: 140px;
+    border-radius: 32px 32px 0 0;
+  }
+
+  .slider-wrapper{
+    height: 70vh;
+  }
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/* ========== HERO SECTION ========== */
+.hero-section{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1600 / 896; /* 🔥 same size for all images */
+  overflow: hidden;
+}
+
+
+.hero-content h1{
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.hero-content p{
+  margin-top: 14px;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+/* ========== LEFT MENU ========== */
+.hero-menu{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 35px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-menu ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.hero-menu a{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+
+  transition: all 0.3s ease;
+}
+
+.hero-menu a:hover,
+.hero-menu a.active{
+  color: #fff;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/* ---------------- DESKTOP DEFAULT ---------------- */
+.menu-toggle,
+.mobile-menu {
+  display: none;
+}
+
+/* ---------------- MOBILE & TABLET ---------------- */
+@media (max-width: 1024px) {
+
+  /* hide side hero menu */
+  .hero-menu {
+    display: none;
+  }
+
+  /* hamburger button */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: fixed;
+    top: 22px;
+    left: 20px;
+    z-index: 1001;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    transition: 0.4s;
+  }
+
+  /* full screen menu */
+  .mobile-menu {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  /* GLASS EFFECT */
+  background: linear-gradient(
+    120deg,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.25)
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateX(-100%);
+}
+
+.mobile-menu a {
+  color: #fff;
+  text-shadow: 0 6px 25px rgba(255,255,255,0.35);
+}
+
+  .mobile-menu ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+  }
+
+  .mobile-menu li {
+    margin: 24px 0;
+  }
+
+  .mobile-menu a {
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: 300;
+  }
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+
+.hero-logo{
+  position: absolute;
+  bottom: 24px;                 /* hero bottom gap */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;         /* click disturb aagama */
+}
+
+.hero-logo img{
+  width: 300px;                  /* desktop size */
+  height: auto;
+  opacity: 0.95;
+
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.4));
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .hero-logo img{
+    width: 70px;
+  }
+}
+.hero-logo{
+  position: absolute;
+  bottom: 24px;                 /* hero bottom gap */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;         /* click disturb aagama */
+}
+
+.hero-logo img{
+  width: 300px;                  /* desktop size */
+  height: auto;
+  opacity: 0.95;
+
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.4));
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .hero-logo img{
+    width: 70px;
+  }
+}
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/* ================= PROJECT VIDEO SHOWCASE ================= */
+
+.projects-showcase{
+  padding: 120px 6vw;
+  background: #f9f9f9;
+}
+
+.showcase-intro{
+  max-width: 900px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.showcase-intro h2{
+  font-size: 42px;
+  margin-bottom: 18px;
+  color: #f4b400;
+}
+
+.showcase-intro p{
+  font-size: 17px;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* CARD */
+.video-card{
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background:#000;
+  grid-row: span var(--rows);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+
+/* VIDEO */
+.video-card video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%) brightness(0.9);
+  transition: 0.5s ease;
+}
+
+/* HOVER EFFECT */
+.video-card:hover video{
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.05);
+}
+
+/* OVERLAY */
+.video-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  padding:20px;
+  background:linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+.video-overlay span{
+  color:#fff;
+  font-size:16px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .projects-showcase{
+    padding: 80px 6vw;
+  }
+
+  .showcase-intro h2{
+    font-size: 28px;
+    color: #f4b400;
+  }
+}
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  grid-auto-rows: 320px;
+  grid-auto-flow: dense;
+  gap:24px;
+}
+.video-card:nth-child(1){
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.video-card:nth-child(2){
+  grid-row: span 2;
+}
+
+.video-card:nth-child(3){
+  grid-column: span 2;
+}
+
+.video-card:nth-child(4){
+  grid-row: span 2;
+}
+
+.video-card:nth-child(5){
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.video-card:nth-child(7){
+  grid-column: span 2;
+}
+
+.video-card:nth-child(9){
+  grid-row: span 2;
+}
+
+.video-card:nth-child(12){
+  grid-column: span 2;
+  grid-row: span 2;
+}
+@media(max-width:900px){
+  .video-grid{
+    grid-template-columns:repeat(2, 1fr);
+    grid-auto-rows:180px;
+  }
+
+  .video-card{
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+}
+/* TOP BAR LANGUAGE SWITCHER */
+.language-toggle {
+  position: fixed;
+  top: 24px;
+  right: 40px;
+  z-index: 99999;
+  display: flex;
+  gap: 8px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  padding: 6px 10px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.lang-btn.active {
+  background: #f4c430; /* YELLOW */
+  color: #111; /* BLACK TEXT */
+  box-shadow: 0 4px 12px rgba(244, 196, 48, 0.3);
+}
+
+.lang-btn:hover:not(.active) {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+/* SIDEBAR LANGUAGE TOGGLE */
+.sidebar-language-toggle {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-lang-buttons {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.sidebar-lang-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  flex: 1;
+  text-align: center;
+}
+
+.sidebar-lang-btn.active {
+  background: var(--gold);
+  color: var(--dark-blue);
+  font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .language-toggle{
+    top: 20px;
+    right: 15px;
+    padding: 5px 8px;
+  }
+  
+  .lang-btn{
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+}
+
+.language-toggle {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  z-index: 99999;
+  display: flex;
+  gap: 8px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  padding: 6px 10px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lang-btn.active {
+  background: #f4c430;
+  color: #111;
+  font-weight: 600;
+}
+
+.lang-btn:hover:not(.active) {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+/* Mobile responsive */
+@media(max-width:768px){
+  .language-toggle{
+    top: 15px;
+    right: 15px;
+    padding: 5px 8px;
+  }
+  
+  .lang-btn{
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .hero-logo img{
+    width: 150px;
+  }
+}
+
+.footer-map {
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.projects-showcase {
+  position: relative;
+  padding: 120px 20px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Crane position */
+.projects-crane {
+  position: absolute;
+  top: -20px;          /* section mela konjam overlap */
+  left: 90px;         /* half outside look */
+  width: 230px;        /* adjust pannalaam */
+  z-index: 1;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* content always above */
+.showcase-intro,
+.video-grid {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes hookFloat {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+.projects-crane {
+  animation: hookFloat 7s ease-in-out infinite;
+}
+@media (max-width: 576px) {
+
+  .projects-crane {
+    display: block !important;   /* hide aaga vidaama */
+    position: absolute;
+    width: 120px;
+    left: -60px;                 /* romba outside pogama */
+    top: 100px;
+    opacity: 0.22;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .projects-showcase {
+    overflow: hidden;            /* horizontal scroll avoid */
+  }
+}
+.contact-fab {
+  position: fixed;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.contact-fab img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* Positioning */
+.whatsapp {
+  bottom: 90px;   /* First button (upper) */
+}
+
+.call {
+  bottom: 20px;   /* Second button (lower) */
+}
+</style>
+</head>
+<body>
+  <strong>
+<section class="hero hero-section">
+  <!-- LANGUAGE TOGGLE -->
+  <div class="language-toggle">
+    <button class="lang-btn" onclick="switchLanguage('ta')">தமிழ்</button>
+    <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+  </div>
+
+  <!-- LEFT MENU BAR -->
+  <nav class="hero-menu">
+    <strong>
+      <ul>
+        <li><a href="index.html" data-english="Home" data-tamil="முகப்பு">Home</a></li>
+        <li><a href="about.html" data-english="About" data-tamil="எங்களைப் பற்றி">About</a></li>
+        <li><a href="service.html" data-english="Service" data-tamil="சேவைகள்">Service</a></li>
+        <li><a href="project.html" class="active" data-english="Project" data-tamil="திட்டங்கள்">Project</a></li>
+        <li><a href="contact.html" data-english="Contact" data-tamil="தொடர்புக்கு">Contact</a></li>
+      </ul>
+    </strong>
+  </nav>
+
+  <!-- MOBILE MENU BUTTON -->
+  <div class="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <nav class="mobile-menu">
+    <ul>
+      <li><a href="index.html" data-english="Home" data-tamil="முகப்பு">Home</a></li>
+      <li><a href="about.html" data-english="About" data-tamil="எங்களைப் பற்றி">About</a></li>
+      <li><a href="service.html" data-english="Service" data-tamil="சேவைகள்">Service</a></li>
+      <li><a href="project.html" class="active" data-english="Project" data-tamil="திட்டங்கள்">Project</a></li>
+      <li><a href="contact.html" data-english="Contact" data-tamil="தொடர்புக்கு">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="text-box">
+      <!-- Top Left Corner -->
+      <div class="corner tl">
+        <span class="h"></span>
+        <span class="v"></span>
+      </div>
+
+      <!-- Bottom Right Corner -->
+      <div class="corner br">
+        <span class="h"></span>
+        <span class="v"></span>
+      </div>
+
+      <h1 data-english="Our Construction Projects" 
+          data-tamil="எங்கள் கட்டுமான திட்டங்கள்">
+        Explore Our Construction Projects
+      </h1>
+      <p data-english="Discover how Lakshmiharam Constructions turns ideas into reality through quality craftsmanship, smart design, and reliable execution."
+         data-tamil="லக்ஷ்மிஹரம் கான்ஸ்ட்ரக்ஷன்ஸ் எப்படி யோசனைகளை உயர்தர வேலைத்திறன், புத்திசாலித்தனமான வடிவமைப்பு மற்றும் நம்பகமான செயலாக்கத்தின் மூலம் நிஜமாக மாற்றுகிறது என்பதைக் கண்டறியுங்கள்.">
+        Discover how Lakshmiharam Constructions turns ideas into reality through quality craftsmanship, smart design, and reliable execution.
+      </p>
+    </div>
+  </div>
+
+  <!-- HERO LOGO -->
+  <div class="hero-logo">
+    <img src="logo.png" 
+         alt="Lakshmiharam Builders Logo"
+         data-english="Lakshmiharam Builders Logo"
+         data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் லோகோ">
+  </div>
+</section>
+
+<!---------------------------------------------------------------------------------------------------------------->
+<section class="projects-section">
+  <!-- HEADER -->
+  <div class="projects-header">
+    <h1 class="projects-title" data-english="<span>Our Projects</span>"
+                              data-tamil="<span>எங்கள் திட்டங்கள்</span>">
+      <span>Our Projects</span>
+    </h1>
+
+    <p class="projects-subtitle" data-english="Quality You Can See. Reliability You Can Trust."
+                                 data-tamil="நீங்கள் பார்க்கக்கூடிய தரம். நீங்கள் நம்பக்கூடிய நம்பகத்தன்மை.">
+      Quality You Can See. Reliability You Can Trust.
+    </p>
+
+    <p class="projects-desc" data-english="Lakshmiharam Builders has successfully delivered a wide range of residential, commercial, and business-oriented construction projects across Virudhunagar. Our work reflects consistent quality, practical design, and dependable execution."
+                              data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் விருதுநகரில் பரவலான குடியிருப்பு, வணிக மற்றும் வணிக சார்ந்த கட்டுமான திட்டங்களை வெற்றிகரமாக வழங்கியுள்ளது. எங்கள் பணி சீரான தரம், நடைமுறை வடிவமைப்பு மற்றும் நம்பகமான செயலாக்கத்தை பிரதிபலிக்கிறது.">
+      Lakshmiharam Builders has successfully delivered a wide range of residential, commercial, and business-oriented construction projects across Virudhunagar. Our work reflects consistent quality, practical design, and dependable execution.
+    </p>
+  </div>
+
+  <!-- PROJECT CATEGORY TILES -->
+  <div class="category-grid">
+    <div class="category-card">
+      <div class="icon-box">🏠</div>
+      <h3 data-english="Residential Homes" data-tamil="குடியிருப்பு வீடுகள்">Residential Homes</h3>
+      <p data-english="Comfortable and well-planned residential constructions designed for long-term living and everyday functionality."
+         data-tamil="நீண்டகால வாழ்க்கை மற்றும் அன்றாட செயல்பாட்டிற்காக வடிவமைக்கப்பட்ட வசதியான மற்றும் நன்கு திட்டமிடப்பட்ட குடியிருப்பு கட்டுமானங்கள்.">
+        Comfortable and well-planned residential constructions designed for long-term living and everyday functionality.
+      </p>
+    </div>
+
+    <div class="category-card">
+      <div class="icon-box">🏢</div>
+      <h3 data-english="Commercial Buildings" data-tamil="வணிக கட்டிடங்கள்">Commercial Buildings</h3>
+      <p data-english="Durable commercial structures planned to support business needs with efficient layouts."
+         data-tamil="திறமையான தளவமைப்புகளுடன் வணிகத் தேவைகளை ஆதரிக்கத் திட்டமிடப்பட்ட நீடித்த வணிக கட்டமைப்புகள்.">
+        Durable commercial structures planned to support business needs with efficient layouts.
+      </p>
+    </div>
+
+    <div class="category-card">
+      <div class="icon-box">🏬</div>
+      <h3 data-english="Shops & Office Spaces" data-tamil="கடைகள் & அலுவலக இடங்கள்">Shops & Office Spaces</h3>
+      <p data-english="Professional shop and office spaces balancing appearance, usability, and durability."
+         data-tamil="தோற்றம், பயன்பாடு மற்றும் நீடித்த தன்மை ஆகியவற்றை சமநிலைப்படுத்தும் தொழில்முறை கடை மற்றும் அலுவலக இடங்கள்.">
+        Professional shop and office spaces balancing appearance, usability, and durability.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!---------------------------------------------------------------------------------------------------------------->
+<!-- ================= PROJECTS VIDEO SHOWCASE ================= -->
+<section class="projects-showcase">
+  <!-- Decorative crane -->
+  <img src="hook.jpg" alt="Construction Crane" class="projects-crane">
+  
+  <div class="showcase-intro">
+    <h2 data-english="Our Recent Construction Works" data-tamil="எங்கள் சமீபத்திய கட்டுமான பணிகள்">
+      Our Recent Construction Works
+    </h2>
+    <p data-english="Every Lakshmiharam project reflects our commitment to quality, durability, and practical design. Below are real site videos showcasing our completed and ongoing construction works across residential and commercial spaces."
+       data-tamil="ஒவ்வொரு லக்ஷ்மிஹரம் திட்டமும் தரம், நீடித்த தன்மை மற்றும் நடைமுறை வடிவமைப்புக்கான எங்கள் அர்ப்பணிப்பை பிரதிபலிக்கிறது. குடியிருப்பு மற்றும் வணிக இடங்களில் எங்கள் நிறைவுற்ற மற்றும் தொடர்கின்ற கட்டுமான பணிகளை வெளிப்படுத்தும் உண்மையான தள வீடியோக்கள் கீழே உள்ளன.">
+      Every Lakshmiharam project reflects our commitment to quality, durability, and practical design. Below are real site videos showcasing our completed and ongoing construction works across residential and commercial spaces.
+    </p>
+  </div>
+
+  <div class="video-grid">
+    <!-- VIDEO CARDS - All have the same structure -->
+    <div class="video-card">
+      <video src="pr1.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr2.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr3.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr4.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr5.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr6.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr7.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr8.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr9.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr10.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr11.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr13.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr14.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr15.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr16.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr17.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr18.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="video-card">
+      <video src="pr19.mp4" muted loop playsinline></video>
+      <div class="video-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!---------------------------------------------------------------------------------------------------------------->
+<section class="footer-cta" data-lang="en">
+  <div class="footer-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="footer-left">
+      <div class="footer-icon">
+        <i class="fa-solid fa-bell"></i>
+      </div>
+
+      <h2
+        data-english="You Dream It, We Design It!"
+        data-tamil="“கனவுகள் உங்கள் வசம்...
+வடிவமைப்பு எங்கள் பொறுப்பு!”">
+        You Dream It, We Design It!
+      </h2>
+
+      <p
+        data-english="Our expert team transforms your vision into reality with precision and creativity."
+        data-tamil="உங்கள் கனவுக்கு துல்லியமும்
+படைப்பாற்றலும் சேர்த்து, அதை நிஜமாக்கும் எங்கள்
+நிபுணர் குழு">
+        Our expert team transforms your vision into reality with precision and creativity.
+      </p>
+
+      <div class="footer-social">
+        <a href="https://www.instagram.com/er_babu.m/?hl=en">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/918695332255">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://www.youtube.com/@lakshmiharambuilders">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a href="mailto:lakshmiharam.builders@gmail.com">
+          <i class="fa-solid fa-at"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT LOGO -->
+    <div class="footer-map">
+  <iframe
+    src="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed"
+    width="100%"
+    height="260"
+    style="border:0; border-radius:14px;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+  </div>
+
+  <!-- BOTTOM INFO -->
+  <div class="footer-bottom">
+
+    <!-- PHONE -->
+    <div class="footer-item">
+      <a href="tel:+918695332255">
+        <i class="fa-solid fa-phone"></i>
+        <p
+          data-english="+91 8144442255 <br> +91 86953 32255" 
+          data-tamil="+91 8144442255 <br> +91 86953 32255">
+          +91 86953 32255, +91 8144442255
+        </p>
+      </a>
+    </div>
+
+    <div class="footer-divider">
+      <span class="divider-anim"></span>
+    </div>
+
+    <!-- LOCATION -->
+    <div class="footer-item">
+      <a href="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed" target="_blank">
+        <i class="fa-solid fa-house"></i>
+        <p
+          data-english="Virudhunagar"
+          data-tamil="விருதுநகர்">
+          Virudhunagar
+        </p>
+      </a>
+    </div>
+
+    <div class="footer-divider">
+      <span class="divider-anim"></span>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div class="footer-item">
+      <a href="https://www.instagram.com/er_babu.m/?hl=en" target="_blank">
+        <i class="fa-brands fa-instagram"></i>
+        <p
+          data-english="@lakshmiharam_constructions"
+          data-tamil="@lakshmiharam_constructions">
+          @lakshmiharam_constructions
+        </p>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- KEYWORDS -->
+  <div class="footer-keywords">
+    <h4
+      data-english="TOP SEARCH KEYWORDS"
+      data-tamil="முக்கிய தேடல் சொற்கள்">
+      TOP SEARCH KEYWORDS
+    </h4>
+
+    <div class="keyword-grid">
+  <ul>
+    <li
+      data-english="Best builders in Virudhunagar"
+      data-tamil="விருதுநகரின் நம்பகமான மற்றும் சிறந்த கட்டுமான
+நிறுவனம்">
+      Best builders in Virudhunagar
+    </li>
+    <li
+      data-english="Steel building construction company in Virudhunagar"
+      data-tamil="விருதுநகரில் தரமான ஸ்டீல் கட்டிட தீர்வுகள் வழங்கும்
+நிறுவனம்">
+      Steel building construction company in Virudhunagar
+    </li>
+    <li
+      data-english="Construction company in Virudhunagar"
+      data-tamil="வீடு மற்றும் வணிக கட்டுமானத்தில் முன்னணி —
+விருதுநகர்">
+      Construction company in Virudhunagar
+    </li>
+    <li
+      data-english="Top 20 construction companies in Virudhunagar"
+      data-tamil="விருதுநகரின் முன்னணி 20 கட்டுமான நிறுவனங்களில்
+ஒன்று">
+      Top 20 construction companies in Virudhunagar
+    </li>
+  </ul>
+
+  <ul>
+    <li
+      data-english="Builders in Virudhunagar"
+      data-tamil="விருதுநகரில் நம்பகமான கட்டுமான சேவைகள்">
+      Builders in Virudhunagar
+    </li>
+    <li
+      data-english="Building construction company in Virudhunagar"
+      data-tamil="விருதுநகரில் அனுபவமிக்க கட்டிடக் கட்டுமான நிறுவனம்">
+      Building construction company in Virudhunagar
+    </li>
+    <li
+      data-english="Top construction companies in Virudhunagar"
+      data-tamil="விருதுநகரின் சிறந்த மற்றும் முன்னணி கட்டுமான நிறுவனர்கள்">
+      Top construction companies in Virudhunagar
+    </li>
+  </ul>
+
+  <ul>
+    <li
+      data-english="Construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் நம்பிக்கைக்குரிய உயர்தர வீடு கட்டுமான சேவைகள்">
+      Construction companies in Virudhunagar
+    </li>
+    <li
+      data-english="Home builders in Virudhunagar"
+      data-tamil="விருதுநகரில் தரமும் அழகும் கொண்ட கட்டுமான தீர்வுகள்">
+      Home builders in Virudhunagar
+    </li>
+    <li
+      data-english="Premium Builder in Virudhunagar"
+      data-tamil="விருதுநகரில் உயர்தர கட்டுமான நிறுவனம்">
+      Premium Builder in Virudhunagar
+    </li>
+    <li
+      data-english="Leading builders in Virudhunagar"
+      data-tamil="விருதுநகரில் முன்னணி பில்டர்கள்">
+      Leading builders in Virudhunagar
+    </li>
+    <li
+      data-english="Leading construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் முன்னணி கட்டுமான நிறுவனங்கள்">
+      Leading construction companies in Virudhunagar
+    </li>
+  </ul>
+
+  <ul>
+    <li
+      data-english="Best construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் சிறந்த கட்டுமான நிறுவனங்கள்">
+      Best construction companies in Virudhunagar
+    </li>
+    <li
+      data-english="Home builders and developers in Virudhunagar"
+      data-tamil="விருதுநகரில் வீடு கட்டுபவர்கள் மற்றும் டெவலப்பர்கள்">
+      Home builders and developers in Virudhunagar
+    </li>
+    <li
+      data-english="House Builders in Virudhunagar"
+      data-tamil="விருதுநகரில் வீடு கட்டும் பில்டர்கள்">
+      House Builders in Virudhunagar
+    </li>
+    <li
+      data-english="Construction builders in Virudhunagar"
+      data-tamil="விருதுநகரில் கட்டுமான பில்டர்கள்">
+      Construction builders in Virudhunagar
+    </li>
+    <li
+      data-english="Top 10 construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் சிறந்த 10 கட்டுமான நிறுவனங்கள்">
+      Top 10 construction companies in Virudhunagar
+    </li>
+  </ul>
+</div>
+
+  
+  </div>
+
+  <!-- BRAND STRIP -->
+  <div class="footer-brand">
+    <span class="brand-line">
+      <span class="brand-anim"></span>
+    </span>
+
+    <h2
+      data-english="LAKSHMIHARAM CONSTRUCTIONS"
+      data-tamil="லட்சுமிஹரம் கன்ஸ்ட்ரக்ஷன்ஸ்">
+      LAKSHMIHARAM <strong>CONSTRUCTIONS</strong>
+    </h2>
+
+    <span class="brand-line">
+      <span class="brand-anim"></span>
+    </span>
+  </div>
+
+  <!-- COPYRIGHT -->
+  <div class="footer-copy"
+       data-english="Copyright © 2025 Lakshmiharam Constructions By Rohil Technologies"
+       data-tamil="பதிப்புரிமை © 2025 லட்சுமிஹரம் கன்ஸ்ட்ரக்ஷன்ஸ் – ரோஹில் டெக்னாலஜீஸ்">
+    Copyright © 2025 Lakshmiharam Constructions By
+    <a href="https://www.rohiltechnologies.com/">Rohil Technologies</a>
+  </div>
+</section>
+<!-- WhatsApp Button -->
+<a href="https://wa.me/918144442255" class="contact-fab whatsapp" target="_blank">
+  <img src="whatsapp.png" alt="WhatsApp">
+</a>
+
+<!-- Call Button -->
+<a href="tel:+918144442255" class="contact-fab call">
+  <img src="contact.png" alt="Contact">
+</a>
+
+<!---------------------------------------------------------------------------------------------------------------->
+<script>
+  let currentLang = 'en';
+
+function switchLanguage(lang){
+  currentLang = lang;
+  
+  // Update all elements with language data attributes
+  document.querySelectorAll('[data-english], [data-tamil]').forEach(el => {
+    if(lang === 'en' && el.dataset.english){
+      el.innerHTML = el.dataset.english;
+    }
+    if(lang === 'ta' && el.dataset.tamil){
+      el.innerHTML = el.dataset.tamil;
+    }
+  });
+  
+  // Update button states
+  document.querySelectorAll('.lang-btn, .sidebar-lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  if(lang === 'en'){
+    document.querySelectorAll('[onclick*="switchLanguage(\'en\')"]').forEach(btn => {
+      btn.classList.add('active');
+    });
+  }else{
+    document.querySelectorAll('[onclick*="switchLanguage(\'ta\')"]').forEach(btn => {
+      btn.classList.add('active');
+    });
+  }
+  
+  // Save preference
+  localStorage.setItem('preferredLanguage', lang);
+}
+
+// On page load
+document.addEventListener('DOMContentLoaded', function(){
+  const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+  switchLanguage(savedLang);
+});
+
+// Language Management
+let currentLanguage = 'en'; // Default language
+
+// Function to switch language
+function switchLanguage(lang) {
+  currentLanguage = lang;
+
+  // Update all elements with language data attributes
+  document.querySelectorAll('[data-english], [data-tamil]').forEach(element => {
+    if (lang === 'en' && element.getAttribute('data-english')) {
+      element.innerHTML = element.getAttribute('data-english');
+    }
+    if (lang === 'ta' && element.getAttribute('data-tamil')) {
+      element.innerHTML = element.getAttribute('data-tamil');
+    }
+    
+    // For image alt tags
+    if (element.tagName === 'IMG') {
+      if (lang === 'en' && element.getAttribute('data-english')) {
+        element.setAttribute('alt', element.getAttribute('data-english'));
+      }
+      if (lang === 'ta' && element.getAttribute('data-tamil')) {
+        element.setAttribute('alt', element.getAttribute('data-tamil'));
+      }
+    }
+  });
+
+  // Update language button states
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if ((lang === 'en' && btn.textContent === 'English') || 
+        (lang === 'ta' && btn.textContent === 'தமிழ்')) {
+      btn.classList.add('active');
+    }
+  });
+
+  // Save to localStorage
+  localStorage.setItem('preferredLanguage', lang);
+}
+
+// On page load
+document.addEventListener('DOMContentLoaded', () => {
+  // Check for saved language preference
+  const savedLanguage = localStorage.getItem('preferredLanguage');
+  if (savedLanguage) {
+    switchLanguage(savedLanguage);
+  }
+});
+</script>
+
+<script>
+  
+gsap.registerPlugin(ScrollTrigger);
+/*---------------------------------------------------------------------------------------------------------------*/
+
+const toggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector(".mobile-menu");
+const links = document.querySelectorAll(".mobile-menu a");
+
+let menuOpen = false;
+
+toggle.addEventListener("click", () => {
+  if (!menuOpen) {
+    gsap.to(mobileMenu, {
+      x: "0%",
+      duration: 0.9,
+      ease: "power4.out"
+    });
+
+    gsap.fromTo(
+      links,
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.12,
+        delay: 0.3,
+        duration: 0.8,
+        ease: "power3.out"
+      }
+    );
+  } else {
+    gsap.to(mobileMenu, {
+      x: "-100%",
+      duration: 0.7,
+      ease: "power4.in"
+    });
+  }
+
+  menuOpen = !menuOpen;
+});
+
+/* close on click */
+links.forEach(link => {
+  link.addEventListener("click", () => {
+    gsap.to(mobileMenu, {
+      x: "-100%",
+      duration: 0.7,
+      ease: "power4.in"
+    });
+    menuOpen = false;
+  });
+});
+/*--------------------------------------------------------------------*/
+  gsap.registerPlugin(ScrollTrigger);
+
+const heroTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top 85%",
+    toggleActions: "play pause play pause"
+  }
+});
+
+/* RESET */
+gsap.set(".hero-bg", { scale: 1.15 });
+gsap.set(".corner.tl .h", { width: "0%" });
+gsap.set(".corner.tl .v", { height: "0%" });
+gsap.set(".corner.br .h", { width: "0%" });
+gsap.set(".corner.br .v", { height: "0%" });
+
+heroTL
+.to(".hero-bg",{ scale:1, duration:2, ease:"power2.out" })
+.to(".corner.tl .h",{ width:"120px", duration:0.8 }, "-=1.4")
+.to(".corner.tl .v",{ height:"120px", duration:0.8 }, "-=0.6")
+.to(".corner.br .h",{ width:"120px", duration:0.8 }, "-=0.9")
+.to(".corner.br .v",{ height:"120px", duration:0.8 }, "-=0.6")
+.to("h1",{ opacity:1, y:0, duration:0.9 }, "-=0.6")
+.to(".hero p",{ opacity:1, y:0, duration:0.7 }, "-=0.4");
+
+/*--------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+const cards = document.querySelectorAll(".video-card");
+let activeVideo = null;
+
+cards.forEach(card => {
+  const video = card.querySelector("video");
+  if (!video) return;
+
+  video.preload = "auto";
+
+  // Hover In
+  card.addEventListener("mouseenter", () => {
+
+    // Pause other playing video
+    if (activeVideo && activeVideo !== video) {
+      activeVideo.pause();
+      activeVideo.currentTime = 0;
+      gsap.to(activeVideo, { scale: 1, duration: 0.4 });
+    }
+
+    activeVideo = video;
+
+    gsap.to(video, {
+      scale: 1.05,
+      duration: 0.5,
+      ease: "power2.out"
+    });
+
+    video.currentTime = 0;
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {}); // AbortError ignore
+    }
+  });
+
+  // Hover Out
+  card.addEventListener("mouseleave", () => {
+    gsap.to(video, {
+      scale: 1,
+      duration: 0.5,
+      ease: "power2.out"
+    });
+
+    if (!video.paused) {
+      video.pause();
+    }
+  });
+});
+
+gsap.fromTo(".showcase-intro h2",
+  {
+    clipPath: "inset(0 100% 0 0)",
+    opacity: 0.2
+  },
+  {
+    clipPath: "inset(0 0% 0 0)",
+    opacity: 1,
+    duration: 2.0,
+    ease: "power4.out",
+    scrollTrigger:{
+      trigger: ".showcase-intro",
+      start: "top 80%"
+    }
+  }
+);
+
+gsap.fromTo(".showcase-intro p",
+  {
+    filter: "blur(10px)",
+    opacity: 0
+  },
+  {
+    filter: "blur(0px)",
+    opacity: 1,
+    duration: 2,
+    delay: 0.5,
+    ease: "power3.out",
+    scrollTrigger:{
+      trigger: ".showcase-intro",
+      start: "top 80%"
+    }
+  }
+);
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* 🔔 Bell ring */
+  if (document.querySelector(".footer-icon i")) {
+    gsap.fromTo(".footer-icon i",
+      { rotation: -15 },
+      {
+        rotation: 15,
+        duration: 0.6,
+        ease: "power1.inOut",
+        repeat: -1,
+        yoyo: true,
+        transformOrigin: "50% 0%"
+      }
+    );
+  }
+
+  /* LEFT CONTENT */
+  if (document.querySelector(".footer-cta")) {
+    gsap.fromTo(
+      ".footer-left h2, .footer-left p, .footer-social a",
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".footer-cta",
+          start: "top 80%",
+        }
+      }
+    );
+  }
+
+  /* BOTTOM ITEMS */
+  if (document.querySelector(".footer-bottom")) {
+    gsap.from(".footer-item", {
+      scrollTrigger: {
+        trigger: ".footer-bottom",
+        start: "top 85%",
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power2.out"
+    });
+  }
+
+  /* KEYWORDS */
+  if (document.querySelector(".footer-keywords")) {
+    gsap.from(".keyword-grid li", {
+      scrollTrigger: {
+        trigger: ".footer-keywords",
+        start: "top 85%",
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: "power1.out"
+    });
+  }
+
+  /* BRAND TITLE */
+  if (document.querySelector(".footer-brand h2")) {
+    gsap.from(".footer-brand h2", {
+      scrollTrigger: {
+        trigger: ".footer-brand",
+        start: "top 90%",
+      },
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.8,
+      ease: "back.out(1.7)"
+    });
+  }
+
+  /* HORIZONTAL BRAND LINE */
+  if (document.querySelector(".brand-anim")) {
+    gsap.to(".brand-anim", {
+      xPercent: 200,
+      duration: 2.6,
+      ease: "none",
+      repeat: -1
+    });
+  }
+
+  /* VERTICAL DIVIDER LINE */
+  if (document.querySelector(".divider-anim")) {
+    gsap.to(".divider-anim", {
+      yPercent: 200,
+      duration: 2.2,
+      ease: "none",
+      repeat: -1
+    });
+  }
+
+});
+</script>
+</strong>
+</body>
+</html>

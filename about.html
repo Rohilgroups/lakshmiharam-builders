@@ -1,0 +1,3514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lakshmiharam Builders – About</title>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  /* ================= COLOR SYSTEM ================= */
+:root{
+  --bg-grey:#f1eeee;
+  --card-grey:#2b2b2b;
+  --card-soft:#3a3a3a;
+  --identity:#f5c400;
+  --text-dark:#111;
+  --text-light:#ffffff;
+  --text-muted:#cfcfcf;
+}
+
+/* ================= GLOBAL ================= */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #b4b2b2;
+  color: var(--dark);
+}
+
+/* LANGUAGE TOGGLE */
+.language-toggle {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  z-index: 99999;
+  display: flex;
+  gap: 8px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  padding: 6px 10px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lang-btn.active {
+  background: #f4c430;
+  color: #111;
+  font-weight: 600;
+}
+
+.lang-btn:hover:not(.active) {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  height: 100%; /* ✅ CHANGED FROM 100vh */
+  min-height: 600px;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position: absolute;
+  inset: 0;
+  background-image: url("images/fire.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.15); /* GSAP zoom ku safe */
+  will-change: transform;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+}
+
+.hero-content{
+  position:relative;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  padding:20px;
+}
+
+/* TEXT BOX */
+.text-box{
+  position:relative;
+  padding:40px 60px;
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+}
+
+/* COMMON CORNER STYLE */
+.corner{
+  position:absolute;
+  width:140px;
+  height:140px;
+  pointer-events:none;
+}
+
+/* HORIZONTAL & VERTICAL LINES */
+.corner .h,
+.corner .v{
+  position:absolute;
+  background:#ffffff;
+}
+
+/* Horizontal line */
+.corner .h{
+  height:1px;
+  width:0; /* GSAP animate */
+}
+
+/* Vertical line */
+.corner .v{
+  width:1px;
+  height:0; /* GSAP animate */
+}
+
+/* 🔹 TOP LEFT CORNER */
+.corner.tl{
+  top:0;
+  left:0;
+}
+
+.corner.tl .h{
+  top:0;
+  left:0;
+}
+
+.corner.tl .v{
+  top:0;
+  left:0;
+}
+
+/* 🔹 BOTTOM RIGHT CORNER */
+.corner.br{
+  bottom:0;
+  right:0;
+}
+
+.corner.br .h{
+  bottom:0;
+  right:0;
+}
+
+.corner.br .v{
+  bottom:0;
+  right:0;
+}
+
+/* TEXT STYLES */
+h1{
+  font-weight:400;
+  color:#fff;
+  margin-bottom:14px;
+  line-height:1.2;
+}
+
+p{
+  font-size: 16px;
+  letter-spacing:1.5px;
+  color:#fff;
+}
+
+/* 📱 MOBILE OPTIMIZATION */
+@media (max-width:768px){
+  .text-box{
+    padding:24px 20px;
+  }
+
+  .corner{
+    width:90px;
+    height:90px;
+  }
+
+  p{
+    letter-spacing:1px;
+  }
+  
+  .hero {
+    min-height: 400px; /* ✅ MOBILE HEIGHT */
+  }
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/* HERO SECTION */
+.hero-section,
+.hero {
+  position: relative;
+  height: 100%; /* ✅ CHANGED FROM 100vh */
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* ===============================
+   SECTION BRIDGE (REPLACES WHITE GAP)
+================================ */
+
+.project-slider.reveal-section::before {
+  content: "";
+  position: absolute;
+  top: -160px;
+  left: 0;
+  width: 100%;
+  height: 180px;
+
+  /* transparent gradient */
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.55) 40%,
+    rgba(255,255,255,1) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ------------------------------
+   SLIDER STRUCTURE
+------------------------------ */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 80%; /* ✅ CHANGED FROM 80vh */
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+}
+
+/* ------------------------------
+   CENTER CONTENT
+------------------------------ */
+.slider-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.slider-content h2 {
+  font-weight: 500;
+}
+
+.slider-content p {
+  margin-top: 10px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+.hero-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%; /* ✅ CHANGED FROM 100vh */
+  z-index: 99999;
+}
+
+/* ------------------------------
+   DOT NAVIGATION
+------------------------------ */
+.slider-nav {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.slider-nav .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+}
+
+.slider-nav .dot.active {
+  background: #696868;
+}
+.hero-menu a,
+.hero-menu a:hover,
+.hero-menu a:active,
+.hero-menu a:visited {
+  color: #f4c430;
+}
+
+.hero-menu a {
+  position: relative;
+  color: #eebf33;
+}
+
+.hero-menu a {
+  position: relative;
+  color: #eebf33;
+}
+
+.hero-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #f4c430;
+  transition: width 0.3s ease;
+}
+
+.hero-menu a:hover::after,
+.hero-menu a.active::after {
+  width: 100%;
+}
+
+/* ------------------------------
+   MOBILE RESPONSIVE
+------------------------------ */
+@media(max-width:768px){
+  .project-slider.reveal-section{
+    margin-top: -80px;
+    padding-top: 140px;
+    border-radius: 32px 32px 0 0;
+  }
+
+  .slider-wrapper{
+    height: 70%; /* ✅ CHANGED FROM 70vh */
+  }
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/* ========== HERO SECTION ========== */
+.hero-section{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1600 / 896; /* 🔥 same size for all images */
+  overflow: hidden;
+}
+
+
+.hero-content h1{
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.hero-content p{
+  margin-top: 14px;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+/* ========== LEFT MENU ========== */
+.hero-menu{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 35px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-menu ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.hero-menu a{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+
+  transition: all 0.3s ease;
+}
+
+.hero-menu a:hover,
+.hero-menu a.active{
+  color: #fff;
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
+
+/* ---------------- DESKTOP DEFAULT ---------------- */
+.menu-toggle,
+.mobile-menu {
+  display: none;
+}
+
+/* ---------------- MOBILE & TABLET ---------------- */
+@media (max-width: 1024px) {
+
+  /* hide side hero menu */
+  .hero-menu {
+    display: none;
+  }
+
+  /* hamburger button */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: fixed;
+    top: 22px;
+    left: 20px;
+    z-index: 1001;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    transition: 0.4s;
+  }
+
+  /* full screen menu */
+  .mobile-menu {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  /* GLASS EFFECT */
+  background: linear-gradient(
+    120deg,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.25)
+  );
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateX(-100%);
+}
+
+.mobile-menu a {
+  color: #fff;
+  text-shadow: 0 6px 25px rgba(255,255,255,0.35);
+}
+
+  .mobile-menu ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+  }
+
+  .mobile-menu li {
+    margin: 24px 0;
+  }
+
+  .mobile-menu a {
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: 300;
+  }
+}
+/*---------------------------------------------------------------------------------------------------------------*/
+
+.hero-logo{
+  position: absolute;
+  top: 120px;                 /* hero bottom gap */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;         /* click disturb aagama */
+}
+
+.hero-logo img{
+  width: 300px;                  /* desktop size */
+  height: auto;
+  opacity: 0.95;
+
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.4));
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .hero-logo img{
+    width: 70px;
+  }
+}
+
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+.about-hero{
+  padding:140px 10% 120px;
+  background:
+    linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--primary) 55%,
+      #ffffff 55%,
+      #ffffff 100%);
+}
+
+.about-hero-inner{
+  max-width:900px;
+}
+
+.about-hero span{
+  display:inline-block;
+  font-size: 16px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--dark);
+  margin-bottom:20px;
+}
+
+.about-hero h1{
+  font-weight:700;
+  margin-bottom:28px;
+  line-height:1.15;
+}
+
+.about-hero p{
+  font-size: 16px;
+  color:var(--muted);
+  max-width:720px;
+}
+
+.about-hero{
+  padding:140px 10% 120px;
+  background:
+    linear-gradient(135deg,
+      var(--primary) 0%,
+      var(--primary) 55%,
+      #ffffff 55%,
+      #ffffff 100%);
+}
+
+.about-hero-inner{
+  max-width:900px;
+}
+
+.about-hero span{
+  display:inline-block;
+  font-size: 16px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--dark);
+  margin-bottom:20px;
+}
+
+.about-hero h1{
+  font-weight:700;
+  margin-bottom:28px;
+  line-height:1.15;
+}
+
+.about-hero p{
+  font-size: 16px;
+  color:var(--muted);
+  max-width:720px;
+}
+
+.about-image img{
+  width:100%;
+  border-radius:22px;
+  box-shadow:0 35px 70px rgba(0,0,0,0.18);
+}
+
+.team-section{
+  padding:120px 10%;
+}
+
+.team-section h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.team-intro{
+  text-align:center;
+  max-width:700px;
+  margin:0 auto 70px;
+  color:var(--muted);
+}
+
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px;
+}
+
+.team-card{
+  background:#fff;
+  border-radius:22px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
+
+.team-card img{
+  width:100%;
+  border-radius:18px;
+  margin-bottom:22px;
+}
+
+.team-card h4{
+  margin-bottom:10px;
+}
+
+.team-card p{
+  font-size: 16px;
+  color:var(--muted);
+}
+
+.why-us{
+  padding:120px 10%;
+  position: relative;
+  background:
+    linear-gradient(120deg,
+      #f9f9f9 0%,
+      #f9f9f9 60%,
+      #f2b705 60%,
+      #f2b705 100%);
+  overflow: hidden;
+}
+
+/* soft diagonal pattern */
+.why-us::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,0.08) 0px,
+      rgba(255,255,255,0.08) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  pointer-events:none;
+}
+
+.why-us h2{
+  margin-bottom:50px;
+  color:#222;
+  font-weight:700;
+  position: relative;
+  z-index: 2;
+}
+
+.why-us h2::after{
+  content:"";
+  width:70px;
+  height:4px;
+  background:#f2b705;
+  display:block;
+  margin-top:14px;
+}
+
+.why-us li{
+  font-size: 16px;
+  margin-bottom:18px;
+  color:#6d6a6a;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  line-height:1.6;
+}
+
+.why-us li::before{
+  content:"✔";
+  color:#f2b705;
+  font-weight:700;
+  font-size: 16px;
+}
+
+.why-us-inner{
+  display:grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap:60px;
+  align-items:center;
+  position: relative;
+  z-index: 2;
+}
+
+.why-us-video{
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.25);
+}
+
+.why-us-video video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+@media(max-width:900px){
+
+  .about-section{
+    grid-template-columns:1fr;
+    gap:50px;
+    padding:80px 7%;
+  }
+
+  .team-section,
+  .why-us{
+    padding:80px 7%;
+  }
+}
+
+.about-hero-new{
+  padding:140px 10% 120px;
+  background:
+    linear-gradient(
+      180deg,
+      #fff 0%,
+      #fff 55%,
+      #f6f6f6 100%
+    );
+  position:relative;
+}
+
+/* subtle yellow accent bar */
+.about-hero-new::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:12px;
+  background:#f5c400;
+}
+
+.about-hero-wrap{
+  max-width: 100%;
+  margin: 0;
+  text-align: left;   /* VERY IMPORTANT */
+}
+
+/* small tag */
+.hero-tag{
+  display:inline-block;
+  font-size: 16px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#b4b1b1;
+  margin-bottom:24px;
+}
+
+/* heading */
+.about-hero-new h1{
+  font-weight:700;
+  line-height:1.15;
+  margin-bottom:28px;
+  color:#111;
+}
+
+/* highlight one word only */
+.about-hero-new h1 span{
+  color:#f5c400;
+}
+
+/* paragraph */
+.about-hero-new p{
+  font-size: 16px;
+  line-height:1.8;
+  color:#555;
+  max-width:760px;
+}
+@media(max-width:900px){
+  .about-hero-new{
+    padding:100px 7% 90px;
+  }
+
+  .about-hero-new p{
+  font-size: 16px;
+  }
+}
+
+.about-hero-grid{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-hero-grid{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-hero-media{
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.about-hero-media video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about-hero-content{
+  max-width: 600px;
+}
+
+.about-hero-content h1{
+  line-height: 1.15;
+  margin-bottom: 22px;
+  color: #fff;
+}
+
+.about-hero-content p{
+  font-size: 16px;
+  line-height: 1.9;
+  color: #cfcfcf;
+}
+@media(max-width: 900px){
+  .about-hero-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero-media{
+    height: 260px;
+  }
+}
+
+.team-card img{
+  transition: transform .6s ease;
+}
+.team-card:hover img{
+  transform: scale(1.05);
+}
+.team-card{
+  will-change: transform;
+}
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card,
+.team-card,
+.about-block,
+.why-us li {
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+:root {
+  --accent: #f6b600; /* yellow */
+  --dark: #111;
+}
+
+.team-card img {
+  transition: transform 0.6s ease;
+}
+
+.team-card:hover img {
+  transform: scale(1.1) translateY(-10px);
+}
+/*---------------------------------------------------------------------------------------------*/
+.footer-cta {
+  background: #1c1f22;
+  color: #fff;
+  padding: 80px 6%;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+.footer-left {
+  max-width: 520px;
+}
+
+.footer-icon {
+  width: 55px;
+  height: 55px;
+  background: #f5c400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.footer-icon i {
+  color: #fff;
+  font-size: 22px;
+}
+
+.footer-left h2 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.footer-left p {
+  color: #bbb;
+  line-height: 1.6;
+}
+
+.footer-social {
+  margin-top: 25px;
+  display: flex;
+  gap: 14px;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #f5c400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.footer-social a:hover {
+  background: #f5c400;
+}
+
+.footer-bottom {
+  margin-top: 70px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.footer-item {
+  flex: 1;
+  color: #ccc;
+}
+
+.footer-item i {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #f5c400;
+}
+
+.footer-keywords {
+  margin-top: 70px;
+}
+
+.footer-keywords h4 {
+  color: #ccc;
+  font-size: 15px;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.keyword-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.keyword-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.keyword-grid li {
+  color: #bdbdbd;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-brand {
+  margin: 70px 0 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.footer-brand h2 {
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: #ccc;
+}
+
+.footer-brand h2 strong {
+  color: #f5c400;
+}
+
+.footer-copy {
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  padding-bottom: 25px;
+}
+
+.footer-copy a {
+  color: #f5c400;
+  text-decoration: none;
+}
+
+.brand-line {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+}
+
+.brand-anim {
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #f5c400,
+    #ffe27a,
+    #f5c400,
+    transparent
+  );
+  z-index: 2;
+  box-shadow: 0 0 6px rgba(245,196,0,0.7),
+              0 0 12px rgba(245,196,0,0.4);
+}
+.footer-map img {
+  width: 380px;
+  height: 260px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #111; /* optional */
+  padding: 30px;    /* optional */
+}
+.footer-item a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-item i {
+  font-size: 30px;              /* 🔥 bigger icons */
+  margin-bottom: 8px;
+  color: #f5c400;
+  transition: 0.3s ease;
+}
+
+.footer-item p {
+  font-size: 14px;
+}
+
+.footer-item a:hover i,
+.footer-item a:hover p {
+  color: #f5c400;
+}
+
+/* VERTICAL DIVIDER */
+.footer-divider {
+  position: relative;
+  width: 2px;
+  height: 70px;
+  background: rgba(255,255,255,0.25);
+  overflow: hidden;
+}
+
+.divider-anim {
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    #f5c400,
+    #ffdf5d,
+    #f5c400,
+    transparent
+  );
+  box-shadow: 0 0 10px rgba(245,196,0,0.9);
+}
+
+/* =====================================
+   FOOTER – MOBILE RESPONSIVE (GLOBAL)
+   DO NOT REMOVE – USED IN ALL PAGES
+===================================== */
+@media (max-width: 768px) {
+  .footer-cta {
+    padding: 60px 16px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-left {
+    max-width: 100%;
+  }
+
+  .footer-icon {
+    margin: 0 auto 20px;
+  }
+
+  .footer-left h2 {
+    font-size: 28px;
+    line-height: 1.3;
+  }
+
+  .footer-left p {
+    font-size: 15px;
+  }
+
+  .footer-social {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  .footer-item {
+    text-align: center;
+  }
+
+  .footer-keywords {
+    margin-top: 50px;
+  }
+
+  .footer-keywords h4 {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .keyword-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    flex-direction: column;
+    gap: 12px;
+    margin: 50px 0 25px;
+  }
+
+  .brand-line {
+    width: 100%;
+    display: block;
+  }
+
+  .footer-brand h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    padding: 0 10px;
+    line-height: 1.6;
+  }
+}
+/*--------------------------------------------------------------------------------------------------------------*/
+.about-section{
+  position: relative;
+  min-height: 100vh;
+  padding: 80px 0;
+
+  background-image: url("../images/bg.png"); /* unga image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* dark transparent overlay */
+.about-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.255);
+  z-index:0;
+}
+
+/* content mela vara */
+.about-container{
+  position: relative;
+  z-index:1;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+/* LEFT */
+.about-title {
+  font-size: 44px;
+  line-height: 1.2;
+  color: #c62828;
+  margin-bottom: 20px;
+}
+
+.about-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  max-width: 420px;
+  margin-bottom: 35px;
+}
+
+.about-image img {
+  width: 100%;
+  height: 400px;
+  max-width: 420px;
+  border-radius: 6px;
+}
+
+/* RIGHT */
+.about-right {
+  padding-top: 10px;
+}
+
+.mv-block {
+  margin-bottom: 45px;
+}
+
+.mv-block h3 {
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.mv-block p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+  max-width: 480px;
+}
+
+.line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+  margin-top: 25px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .about-title {
+    font-size: 36px;
+  }
+}
+/* ===== HEADING TEXT COLOR SPLIT ===== */
+
+/* MAIN H1 */
+.about-title{
+  background: linear-gradient(
+    90deg,
+    #f2c94c 0%,     /* YELLOW */
+    #f2c94c 38%,    /* HOW MUCH YELLOW */
+    #f2c94c 38%,      /* BLACK */
+    #f2c94c 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* RIGHT SIDE H3 */
+.mv-block h3{
+  background: linear-gradient(
+    90deg,
+    #f2c94c 0%,
+    #f2c94c 45%,
+    #f2c94c 45%,
+    #f2c94c 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mv-block h3 i{
+  color: #f54e01; /* yellow accent */
+  margin-left: 8px;
+  font-size: 16px;
+}
+.mv-block h3{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+/* click pannum bothu */
+.mv-block h3:active{
+  transform: scale(1.08);
+}
+.mv-block h3{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  transition: transform 0.25s ease;
+}
+
+.mv-block h3.zoom{
+  transform: scale(1.08);
+}
+.mv-block h3:active i{
+  color: #f5b301;
+}
+.mv-block h3{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* hover + click same effect */
+.mv-block h3:hover,
+.mv-block h3:active{
+  transform: scale(1.08);
+}
+.mv-block h3:hover i,
+.mv-block h3:active i{
+  color: #f5b301; /* yellow accent */
+}
+.mv-block h3{
+  will-change: transform;
+}
+.mv-block h3{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* default icon color */
+.mv-block h3 i{
+  color: #999;          /* normal grey */
+  transition: color 0.25s ease;
+}
+
+/* hover + click – icon only */
+.mv-block h3:hover i,
+.mv-block h3:active i{
+  color: #f5b301;       /* yellow accent */
+}
+/* ===== RIGHT SIDE GREY BOX ===== */
+.mv-block{
+  background: #fcfbfb;        /* light grey */
+  padding: 28px 30px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+
+/* paragraph inside box */
+.mv-block p{
+  color: #4e4c4c;               /* darker grey for readability */
+}
+
+/* divider line inside grey box */
+.mv-block .line{
+  background: #ddd;
+}
+.mv-block{
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+.mv-block .line{
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: #d6d6d6;          /* light grey base */
+  margin-top: 25px;
+  overflow: hidden;
+}
+.mv-block .line{
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: #d6d6d6;      /* light grey base */
+  margin-top: 25px;
+  overflow: hidden;
+}
+
+.mv-block .line span{
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #777;         /* dark grey moving line */
+}
+.about-section{
+  background: #f7f4f1;   /* page light grey / off-white */
+}
+.about-right{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* CARD FIX */
+.mv-block{
+  background: #dddbdb;       /* box always white */
+  padding: 15px 30px;
+  border-radius: 8px;
+
+  max-width: 500px;          /* ❗ box perusa pogama */
+  width: 100%;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+.mv-block p{
+  max-width: 550px;
+  color: #444;
+}
+.mv-block .line{
+  width: 100%;
+}
+.about-right{
+  align-items: flex-start;
+}
+.about-right{
+  position: relative;
+}
+
+.mv-block{
+  max-width: 700px;
+}
+.about-hero-new{
+  background:#b4b0b0;
+  padding:100px 6%;
+}
+
+.about-hero-grid{
+  display:grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap:60px;
+  align-items:center;
+}
+
+/* LEFT VIDEO */
+.about-hero-media{
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+}
+
+.about-hero-media video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* RIGHT CONTENT */
+.about-hero-content .hero-tag{
+  display:inline-block;
+  margin-bottom:18px;
+  font-size: 16px;
+  letter-spacing:1px;
+  color:#f5c400; /* yellow accent */
+  font-weight:600;
+}
+
+.about-hero-content h1{
+  line-height:1.2;
+  margin-bottom:22px;
+  color:#f5f5f2;
+}
+
+.about-hero-content p{
+  font-size:16px;
+  line-height:1.8;
+  color:#1f1e1e;
+  max-width:560px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .about-hero-grid{
+    grid-template-columns:1fr;
+  }
+}
+.about-hero-title{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+/* FIRST LINE – STRONG & PURE */
+.about-hero-title span:first-child{
+  position: relative;
+  padding-left: 18px;
+}
+
+/* YELLOW ARCHITECT LINE */
+.about-hero-title span:first-child::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 80%;
+  background: #f4c430;
+}
+
+/* SECOND LINE – QUIET CONFIDENCE */
+.about-hero-title span:last-child{
+  font-weight: 600;
+  font-size: 48px;
+  color: #d6d6d6;
+}
+
+/* ================= STORY SECTION ================= */
+
+.about-content {
+  background: #fafafa;
+  padding: 100px 20px;
+}
+
+.about-block {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* Title */
+.about-tit h2 {
+  font-weight: 700;
+  color: #c9a227; /* muted premium gold */
+  margin-bottom: 40px;
+  position: relative;
+  padding-left: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Vertical accent line */
+.about-tit h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 80%;
+  background: #c9a227;
+  border-radius: 2px;
+}
+
+/* Paragraphs */
+.about-tit p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #4a4a4a;
+  margin-bottom: 28px;
+}
+
+/* First paragraph emphasis */
+.about-tit p:first-of-type {
+  color: #3a3a3a;
+}
+
+/* Drop cap */
+.about-tit p:first-of-type::first-letter {
+  font-size: 64px;
+  font-weight: 700;
+  color: #c9a227;
+  float: left;
+  line-height: 1;
+  margin-right: 12px;
+  margin-top: 6px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .about-tit h2 {
+    font-size: 30px;
+  }
+
+  .about-tit p {
+    font-size: 16px;
+  }
+
+  .about-tit p:first-of-type::first-letter {
+    font-size: 52px;
+  }
+}
+
+
+/* ================= STORY SECTION ================= */
+
+.about-content {
+  background: #fafafa;
+  padding: 100px 20px;
+}
+
+.about-block {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.about-tit h2 {
+  font-weight: 700;
+  color: #c9a227; /* premium muted gold */
+  margin-bottom: 40px;
+  position: relative;
+  padding-left: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* animated vertical line */
+.story-line {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 0;
+  background: #c9a227;
+  border-radius: 2px;
+}
+
+/* paragraphs */
+.about-tit p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #4a4a4a;
+  margin-bottom: 28px;
+}
+
+/* first para emphasis */
+.about-tit p:first-of-type {
+  color: #3a3a3a;
+}
+
+/* drop cap */
+.about-tit p:first-of-type::first-letter {
+  font-size: 64px;
+  font-weight: 700;
+  color: #c9a227;
+  float: left;
+  line-height: 1;
+  margin-right: 12px;
+  margin-top: 6px;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .about-tit h2 {
+    font-size: 30px;
+  }
+
+  .about-tit p {
+    font-size: 16px;
+  }
+}
+/*------------------------------------------------------*/
+.home-steps {
+  padding: 80px 60px;
+  background: #fff;
+  text-align: center;
+}
+
+.home-steps h2 {
+  font-weight: 700;
+  color: rgb(255, 217, 0);
+  margin-bottom: 12px;
+}
+
+.home-steps .intro {
+  max-width: 900px;
+  margin: 0 auto 70px;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.steps-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px;
+  position: relative;
+}
+
+.step {
+  position: relative;
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 60px;
+  height: 100%;
+  border-left: 2px dashed #f2ef22;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: #f2ef22;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+.step-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+}
+
+.step-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.step-card h3 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.step-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.step-card ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.step-card ul li::before {
+  content: "❖";
+  position: absolute;
+  left: 0;
+  color: #f2ef22;
+  font-size: 16px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .steps-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .step::before {
+    display: none;
+  }
+}
+/* CARD */
+.step-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+/* IMAGE */
+.step-card img {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+.step-card img {
+  width: 100%;
+  height: 240px;          /* 🔥 SHORT HEIGHT */
+  object-fit: cover;     /* image stretch illa */
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+.steps-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px;
+  position: relative;
+}
+
+.step {
+  position: relative;
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 60px;
+  height: 100%;
+  border-left: 2px dashed #f2ef22;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: #f2ef22;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+.step-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+}
+
+.step-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.step-card h3 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.step-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.step-card ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.step-card ul li::before {
+  content: "❖";
+  position: absolute;
+  left: 0;
+  color: #f2ef22;
+  font-size: 16px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .steps-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .step::before {
+    display: none;
+  }
+}
+.step {
+  position: relative;
+  padding-left: 60px; /* 🔥 THIS CREATES SPACE */
+}
+
+/* ORANGE DOTTED LINE */
+.step::before {
+  content: "";
+  position: absolute;
+  left: 20px;        /* line position */
+  top: 60px;
+  height: calc(100% - 60px);
+  border-left: 2px dashed #f2ef22;
+}
+
+/* NUMBER CIRCLE */
+.step-number {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  background: #f2ef22;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* CARD */
+.step-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.step {
+  position: relative;
+  padding-left: 60px;
+}
+
+.step-line {
+  position: absolute;
+  left: 20px;
+  top: 50px;
+  width: 2px;
+  height: calc(100% - 50px);
+  background-image: linear-gradient(
+    to bottom,
+    #f2b705 40%,
+    rgba(242,183,5,0) 0%
+  );
+  background-size: 2px 10px;
+  transform-origin: top;
+}
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .hero-logo img{
+    width: 150px;
+    margin-top: -70px;
+  }
+}
+.footer-map {
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.about-content {
+  position: relative;
+  background: #fafafa;
+  padding: 120px 20px;
+  overflow: hidden;
+}
+
+/* Right side crane */
+.about-crane {
+  position: absolute;
+  right: -100px;     /* half outside */
+  top: -30px;
+  width: 700px;
+  aspect-ratio: auto;
+  opacity: 0.95;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* content always above crane */
+.about-block {
+  position: relative;
+  z-index: 2;
+}
+@keyframes craneFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+.about-crane {
+  animation: craneFloat 8s ease-in-out infinite;
+}
+/* ===== Tablet view ===== */
+@media (max-width: 992px) {
+
+  .about-content {
+    padding: 80px 16px;
+  }
+
+  .about-crane {
+    width: 420px;
+    right: -140px;       /* konjam inside */
+    top: 120px;
+    opacity: 0.35;
+    z-index: 1;
+  }
+}
+
+/* ===== Mobile view ===== */
+@media (max-width: 576px) {
+
+  .about-content {
+    padding: 64px 14px;
+  }
+
+  .about-crane {
+    width: 260px;        /* mobile-safe size */
+    right: -160px;       /* full outside pogama */
+    top: 140px;
+    opacity: 0.22;
+    z-index: 1;
+    transform: none;     /* animation glitch avoid */
+  }
+}
+.contact-fab {
+  position: fixed;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.contact-fab img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* Positioning */
+.whatsapp {
+  bottom: 90px;   /* First button (upper) */
+}
+
+.call {
+  bottom: 20px;   /* Second button (lower) */
+}
+</style>
+</head>
+<body>
+  <strong>
+  <!-- LANGUAGE TOGGLE -->
+<div class="language-toggle">
+    <button class="lang-btn" onclick="switchLanguage('ta')">தமிழ்</button>
+    <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+</div>
+
+<section class="hero hero-section">
+
+   <!-- LEFT MENU BAR -->
+  <nav class="hero-menu">
+    <strong>
+      <ul>
+      <li><a href="index.html" data-english="Home" data-tamil="முகப்பு">Home</a></li>
+      <li><a href="about.html" class="active" data-english="About" data-tamil="எங்களைப் பற்றி">About</a></li>
+      <li><a href="service.html" data-english="Service" data-tamil="சேவைகள்">Service</a></li>
+      <li><a href="project.html" data-english="Project" data-tamil="திட்டங்கள்">Project</a></li>
+      <li><a href="contact.html" data-english="Contact" data-tamil="தொடர்புக்கு">Contact</a></li>
+    </ul>
+    </strong>
+  </nav>
+
+  <!-- MOBILE MENU BUTTON -->
+<div class="menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- MOBILE MENU -->
+<nav class="mobile-menu">
+  <ul>
+    <li><a href="index.html" data-english="Home" data-tamil="முகப்பு">Home</a></li>
+    <li><a href="about.html" class="active" data-english="About" data-tamil="எங்களைப் பற்றி">About</a></li>
+    <li><a href="service.html" data-english="Service" data-tamil="சேவைகள்">Service</a></li>
+    <li><a href="project.html" data-english="Project" data-tamil="திட்டங்கள்">Project</a></li>
+    <li><a href="contact.html" data-english="Contact" data-tamil="தொடர்புக்கு">Contact</a></li>
+  </ul>
+</nav>
+
+
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="text-box">
+
+      <!-- Top Left Corner -->
+      <div class="corner tl">
+        <span class="h"></span>
+        <span class="v"></span>
+      </div>
+
+      <!-- Bottom Right Corner -->
+      <div class="corner br">
+        <span class="h"></span>
+        <span class="v"></span>
+      </div>
+
+      <h1 data-english="About Our Company" 
+          data-tamil="எங்கள் நிறுவனம் பற்றி">
+        About Our Company
+      </h1>
+      
+      <p data-english="We are committed to delivering high-quality construction solutions that combine innovation, reliability, and excellence to bring your vision to life." 
+         data-tamil="புதுமை, நம்பகத்தன்மை மற்றும் சிறப்பு ஆகியவற்றை இணைத்து உயர் தர கட்டுமான தீர்வுகளை வழங்க உறுதிபூண்டுள்ளோம், உங்கள் பார்வையை வாழ்க்கையில் கொண்டுவருவதற்காக.">
+        We are committed to delivering high-quality construction solutions that combine innovation, reliability, and excellence to bring your vision to life.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- HERO LOGO -->
+<div class="hero-logo">
+  <img src="logo.png" alt="Lakshmiharam Builders Logo" 
+       data-english="Lakshmiharam Builders Logo"
+       data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் லோகோ">
+</div>
+
+</section>
+
+<section class="about-hero-new">
+  <div class="about-hero-wrap about-hero-grid">
+
+    <!-- LEFT -->
+    <div class="about-hero-media">
+      <video autoplay muted loop playsinline>
+        <source src="3D-3.mp4" type="video/mp4">
+      </video>
+    </div>
+ 
+    <!-- RIGHT -->
+    <div class="about-hero-content">
+      <span class="hero-tag" data-english="ABOUT LAKSHMIHARAM BUILDERS" 
+            data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் பற்றி">
+        ABOUT LAKSHMIHARAM BUILDERS
+      </span>
+
+      <h1 class="about-hero-title" 
+          data-english="<span>Building With Purpose</span><span>Growing With Integrity</span>" 
+          data-tamil="<span>கட்டிடங்களை நோக்கத்துடன் கட்டுவது</span><span>நேர்மையுடன் வளர்வது</span>">
+        <span>Building With Purpose</span>
+        <span>Growing With Integrity</span>
+      </h1>
+
+      <p data-english="Lakshmiharam Builders was founded with a simple belief — construction is not just about buildings, but about people, trust, and long-term value. What began as a focused and passionate team has grown into a reliable construction partner delivering residential, commercial, and turnkey projects with uncompromising quality." 
+         data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் ஒரு உறுதியான நம்பிக்கையுடன் நிறுவப்பட்டது — கட்டுமானம் என்பது சுவர், கம்பி மட்டும் இல்லை; மக்களின் கனவு, நம்பிக்கை மற்றும் நீண்டகால மதிப்பை உருவாக்குவது தான். ஆரம்பத்தில் ஒரு ஆர்வமுள்ள சிறிய குழுவாக இருந்தோம். இன்று, வீடுகள், வணிகக் கட்டிடங்கள் மற்றும் டர்ன்கி திட்டங்களை உயர்ந்த தரத்துடன், நேர்மையுடன் செய்து கொடுக்கும் ஒரு நம்பகமான கட்டுமான நிறுவனமாக வளர்ந்துள்ளோம்.">
+        Lakshmiharam Builders was founded with a strong belief — construction is not just about buildings, but about people, trust, and long-term value. What began as a focused and passionate team has grown into a reliable construction partner delivering residential, commercial, and turnkey projects with uncompromising quality.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="about-content">
+ <!-- Decorative crane -->
+  <img src="crane.png" alt="Construction Crane" class="about-crane">
+
+  <div class="about-block">
+    <div class="about-tit">
+      <h2 data-english="Our Story & Journey" 
+          data-tamil="எங்கள் கதை & பயணம்">
+        <span class="story-line"></span>
+        Our Story & Journey
+      </h2>
+    
+      <p data-english="Lakshmiharam Builders began with a clear and focused vision — to bring honesty, craftsmanship, and long-term value into every construction project we undertake. From the very beginning, our belief has been that construction is not merely about structures, but about people, trust, and responsibility. Each project we accept carries the promise of quality, transparency, and commitment, values that continue to define who we are today." 
+         data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் ஒரு தெளிவான மற்றும் கவனம் செலுத்தப்பட்ட பார்வையுடன் தொடங்கியது — நேர்மை, அனுபவத் திறன் மற்றும் நீண்ட கால மதிப்பை நாங்கள் மேற்கொள்ளும் ஒவ்வொரு கட்டுமான திட்டத்திலும் கொண்டுவருவது. தொடக்கத்திலிருந்தே, கட்டுமானம் என்பது கட்டமைப்புகளைப் பற்றி மட்டுமல்ல, மக்கள், நம்பிக்கை மற்றும் பொறுப்பு பற்றியது என்று எங்கள் நம்பிக்கை இருந்தது. நாங்கள் ஏற்றுக்கொள்ளும் ஒவ்வொரு திட்டமும் தரம், வெளிப்படைத்தன்மை மற்றும் அர்ப்பணிப்பு ஆகியவற்றின் வாக்குறுதியைக் கொண்டுள்ளது, இது இன்று நாம் யார் என்பதை வரையறுக்கும் மதிப்புகள்.">
+        Lakshmiharam Builders began with a clear and focused vision — to bring honesty, craftsmanship, and long-term value into every construction project we undertake. From the very beginning, our belief has been that construction is not merely about structures, but about people, trust, and responsibility. Each project we accept carries the promise of quality, transparency, and commitment, values that continue to define who we are today.
+      </p>
+
+      <p data-english="Rooted deeply in our local community, our journey has been shaped by lasting relationships, repeat clients, and referrals earned through consistent performance. Over the years, we have grown steadily by listening carefully to our clients’ needs and delivering solutions that combine practical design, efficient execution, and durable materials. This approach has allowed us to build not just buildings, but confidence and reliability across every stage of construction." 
+         data-tamil="எங்கள் நிறுவனம் உள்ளூர்
+மக்களுடன் நெருக்கமாக வளர்ந்தது. எங்களை நம்பி
+மீண்டும் வரும் வாடிக்கையாளர்கள் மற்றும் அவர்கள்
+சொல்லும் பரிந்துரைகளே எங்கள் வளர்ச்சிக்குக் காரணம்.
+வாடிக்கையாளர்கள் என்ன வேண்டும் என்பதை நாங்கள்
+கவனமாகக் கேட்டு, பயன்படுத்த எளிதான வடிவமைப்பு,
+தரமான கட்டுமானம் மற்றும் நீடித்த பொருட்களை
+கொண்டு வேலை செய்து வருகிறோம். அதனால்,
+ஒவ்வொரு கட்டுமான நிலையிலும் நம்பிக்கையுடன்
+கூடிய சேவையை வழங்க முடிகிறது.">
+        Rooted deeply in our local community, our journey has been shaped by lasting relationships, repeat clients, and referrals earned through consistent performance. Over the years, we have grown steadily by listening carefully to our clients’ needs and delivering solutions that combine practical design, efficient execution, and durable materials. This approach has allowed us to build not just buildings, but confidence and reliability across every stage of construction.
+      </p>
+
+      <p data-english="Our experience spans independent homes, residential developments, commercial spaces, and turnkey projects, each reflecting our attention to detail and respect for timelines and budgets. As we continue to grow, Lakshmiharam Builders remains committed to improving standards, embracing innovation, and delivering construction solutions that stand strong for generations. Our journey is one of continuous learning, responsible growth, and an unwavering dedication to excellence." 
+         data-tamil="தனி வீடுகள், வீடு
+மேம்பாடுகள், வணிக இடங்கள் மற்றும் முழுமையான
+கட்டுமான திட்டங்களில் நாங்கள் அனுபவம் பெற்றவர்கள்.
+
+ஒவ்வொரு வேலைக்கும் சிறிய விஷயங்களையும்
+கவனித்து, நேரத்துக்குள் மற்றும் செலவு கட்டுப்பாட்டுடன்
+பணிகளை முடிக்கிறோம்.
+
+எதிர்காலத்திலும் தரமான கட்டுமானம், புதிய
+யோசனைகள் மற்றும் நீண்ட காலம் நிலைக்கும்
+கட்டிடங்களை வழங்க லக்ஷ்மிஹரம் பில்டர்ஸ்
+தொடர்ந்து முயற்சி செய்கிறது. கற்றுக்கொள்வதும்,
+பொறுப்புடன் வளர்வதும், சிறந்ததை வழங்குவதுமே
+எங்கள் பயணமாகும்.">
+        Our experience spans independent homes, residential developments, commercial spaces, and turnkey projects, each reflecting our attention to detail and respect for timelines and budgets. As we continue to grow, Lakshmiharam Builders remains committed to improving standards, embracing innovation, and delivering construction solutions that stand strong for generations. Our journey is one of continuous learning, responsible growth, and an unwavering dedication to excellence.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="about-container">
+
+    <!-- LEFT -->
+    <div class="about-left">
+      <h1 class="about-title" 
+          data-english="Raising Standards with<br>Every Project" 
+          data-tamil="ஒவ்வொரு திட்டத்திலும்<br>தரங்களை உயர்த்துகிறோம்">
+        Raising Standards with<br>
+        Every Project
+      </h1>
+
+      <p class="about-desc" 
+         data-english="We build every project on decades of trust, raising the bar not only in quality but also in how people experience home. From thoughtful design to precise execution, every detail is crafted to deliver lasting value, comfort, and confidence for generations to come." 
+         data-tamil="நம்பிக்கையை அடிப்படையாக
+கொண்டு ஒவ்வொரு வீட்டையும் நாங்கள் கட்டுகிறோம்.
+கட்டுமான தரம் மட்டும் அல்ல, அந்த வீட்டில் மக்கள்
+எப்படி வசதியாக வாழ்கிறார்கள் என்பதைவும்
+கவனிக்கிறோம். வடிவமைப்பிலிருந்து கட்டுமானம்
+முடியும் வரை, ஒவ்வொரு விஷயமும் நீண்ட நாள்
+பயன்பாடு, வசதி மற்றும் நிம்மதியை தரும் வகையில்
+செய்யப்படுகிறது.">
+        We build every project on decades of trust, raising the bar not only in quality but also in how people experience home. From thoughtful design to precise execution, every detail is crafted to deliver lasting value, comfort, and confidence for generations to come.
+      </p>
+
+      <p class="about-desc" 
+         data-english="With a deep understanding of evolving lifestyles, we approach every project with responsibility and vision. Our team works closely with clients at every stage, ensuring transparency, timely delivery, and a seamless journey from concept to completion." 
+         data-tamil="மாறிவரும் வாழ்க்கை முறைகளைப் பற்றிய ஆழமான புரிதலுடன், ஒவ்வொரு திட்டத்தையும் பொறுப்புணர்வுடனும் பார்வையுடனும் அணுகுகிறோம். எங்கள் குழு ஒவ்வொரு கட்டத்திலும் வாடிக்கையாளர்களுடன் நெருக்கமாக வேலை செய்கிறது, வெளிப்படைத்தன்மை, சரியான நேரத்தில் விநியோகம் மற்றும் கருத்திலிருந்து நிறைவு வரை தொடர்ச்சியான பயணத்தை உறுதி செய்கிறது.">
+        With a deep understanding of evolving lifestyles, we approach every project with responsibility and vision. Our team works closely with clients at every stage, ensuring transparency, timely delivery, and a seamless journey from concept to completion.
+      </p>
+
+      <div class="about-image">
+        <img src="https://www.kgbuilders.com/build/assets/mission-C7l-Kpnq.jpg" 
+             alt="Mission Vision Values" 
+             data-english="Mission Vision Values" 
+             data-tamil="குறிக்கோள் பார்வை மதிப்புகள்">
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="about-right">
+      <div class="mv-block">
+        <h3 data-english="MISSION <i class='fa-solid fa-meteor'></i>" 
+            data-tamil="குறிக்கோள் <i class='fa-solid fa-meteor'></i>">
+          MISSION <i class="fa-solid fa-meteor"></i>
+        </h3>
+        <p data-english="To consistently exceed the expectations of our investors, corporate clients, and consumers by delivering longer-lasting, higher-quality construction with a focus on transparency, improved specifications, timely delivery, and unwavering professionalism." 
+           data-tamil="எங்கள்
+வேலைகளில் தெளிவான செயல்முறை, தரமான
+பொருட்கள், நேரத்திற்கு சரியான விநியோகம் மற்றும்
+தொழில்முறை அணுகுமுறையை பின்பற்றுகிறோம்.
+இதனால் நீண்ட காலம் நிலைக்கும் உயர்தர
+கட்டுமானத்தை வழங்கி, முதலீட்டாளர்கள், நிறுவனங்கள்
+மற்றும் வாடிக்கையாளர்கள் எதிர்பார்ப்பை விட
+அதிகமாகச் செய்ய முடிகிறது.">
+          To consistently exceed the expectations of our investors, corporate clients, and consumers by delivering longer-lasting, higher-quality construction with a focus on transparency, improved specifications, timely delivery, and unwavering professionalism.
+        </p>
+        <span class="line">
+          <span></span>
+        </span>
+      </div>
+
+      <div class="mv-block">
+        <h3 data-english="VISION <i class='fa-solid fa-eye'></i>" 
+            data-tamil="பார்வை <i class='fa-solid fa-eye'></i>">
+          VISION <i class="fa-solid fa-eye"></i>
+        </h3>
+        <p data-english="To be a leading real estate developer, setting new benchmarks for top-notch projects and concepts across all markets, propelling the development of contemporary India, while creating outstanding value to our investors and clients." 
+           data-tamil="எல்லா சந்தைகளிலும்
+தரமான திட்டங்களையும் புதிய கருத்துகளையும் கொண்டு
+முன்னணி ரியல் எஸ்டேட் நிறுவனமாக இருக்க
+வேண்டும் என்பதே எங்கள் நோக்கம். இதன் மூலம்,
+இன்றைய இந்தியாவின் வளர்ச்சிக்கு உதவி செய்து,
+
+முதலீட்டாளர்களுக்கும் வாடிக்கையாளர்களுக்கும் சிறந்த
+மதிப்பை வழங்குகிறோம்.">
+          To be a leading real estate developer, setting new benchmarks for top-notch projects and concepts across all markets, propelling the development of contemporary India, while creating outstanding value to our investors and clients.
+        </p>
+        <span class="line">
+          <span></span>
+        </span>
+      </div>
+
+      <div class="mv-block">
+        <h3 data-english="VALUES <i class='fa-solid fa-handshake'></i>" 
+            data-tamil="மதிப்புகள் <i class='fa-solid fa-handshake'></i>">
+          VALUES <i class="fa-solid fa-handshake"></i>
+        </h3>
+        <p data-english="We build residential masterpieces with the same love and detail we would devote to our own homes, emphasizing quality, standardization & attention to detail. Grounded in sound cultural values from the very beginning, we make sure each project is a reflection of the integrity that defines us." 
+           data-tamil="எங்கள் வீட்டைப்
+போலவே, உங்கள் வீட்டையும் அன்புடன் கட்டுகிறோம்.
+தரமான பொருட்கள், சரியான வேலைப்பாடு மற்றும் சிறிய
+விஷயங்களுக்கும் கவனம் செலுத்துகிறோம்.
+ஆரம்பத்திலிருந்தே நல்ல கொள்கைகளைப் பின்பற்றி,
+ஒவ்வொரு திட்டமும் எங்கள் நேர்மையையும்
+நம்பிக்கையையும் காட்டும் வகையில் இருக்கும் என்பதை
+உறுதி செய்கிறோம்.">
+          We build residential masterpieces with the same love and detail we would devote to our own homes, emphasizing quality, standardization & attention to detail. Grounded in sound cultural values from the very beginning, we make sure each project is a reflection of the integrity that defines us.
+        </p>
+        <span class="line">
+          <span></span>
+        </span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="home-steps">
+
+  <h2 data-english="What to Do When You're Ready to Build a Home" 
+      data-tamil="வீடு கட்ட தயாராக இருக்கும்போது என்ன செய்ய வேண்டும்">
+    What to Do When You're Ready to Build a Home
+  </h2>
+  
+  <p class="intro" 
+     data-english="At Lakshmiharam Constructions, we know that building your dream home is a big step. It's exciting, but if you don't know where to start, it could also be difficult. Don’t worry! We are available to help. To begin building a home, simply follow these simple steps." 
+     data-tamil="லக்ஷ்மிஹரம் கான்ஸ்ட்ரக்ஷன்ஸில், உங்கள் கனவு வீட்டை கட்டுவது ஒரு பெரிய படி என்று எங்களுக்குத் தெரியும். இது உற்சாகமானது, ஆனால் எங்கு தொடங்குவது என்று உங்களுக்குத் தெரியாவிட்டால், அது கடினமாகவும் இருக்கும். கவலைப்பட வேண்டாம்! நாங்கள் உதவ காத்திருக்கிறோம். ஒரு வீட்டைக் கட்டத் தொடங்க, இந்த எளிய படிகளைப் பின்பற்றவும்.">
+    At Lakshmiharam Constructions, we know that building your dream home is a big step. It's exciting, but if you don't know where to start, it could also be difficult. Don’t worry! We are available to help. To begin building a home, simply follow these simple steps.
+  </p>
+
+  <div class="steps-wrapper">
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-number">1</div>
+
+      <div class="step-card">
+        <img src="https://media.istockphoto.com/id/1485996637/photo/top-view-team-engineer-building-inspection-use-tablet-computer-and-blueprint-working-at.jpg?s=612x612&w=0&k=20&c=HvHuZc-49SNor9cEL13I8c7esfq-wNlaULYhWC7YtZI=" 
+             alt="We Give a Care" 
+             data-english="We Give a Care" 
+             data-tamil="நாங்கள் அக்கறை காட்டுகிறோம்">
+        <h3 data-english="We Give a Care" 
+            data-tamil="நாங்கள் அக்கறை காட்டுகிறோம்">
+          We Give a Care
+        </h3>
+        <p data-english="We approach every project with genuine care and ownership" 
+           data-tamil="நாங்கள் செய்யும் ஒவ்வொரு வேலைக்கும் முழுப்
+பொறுப்புடன் செய்கிறோம்.">
+          We approach every project with genuine care and ownership
+        </p>
+        <ul>
+          <li data-english="We take pride in every detail we deliver" 
+              data-tamil="ஒவ்வொரு திட்டத்தையும் எங்கள் சொந்த திட்டமாகவே
+கருதுகிறோம்.">
+            We take pride in every detail we deliver
+          </li>
+          <li data-english="Quality is never compromised at any stage" 
+              data-tamil="எந்த நிலையிலும் தரத்தில் சமரசம் செய்ய மாட்டோம்.">
+            Quality is never compromised at any stage
+          </li>
+          <li data-english="We treat every project like our own" 
+              data-tamil="ஒவ்வொரு திட்டத்தையும் நமது சொந்தமாக கருதுகிறோம்">
+            We treat every project like our own
+          </li>
+          <li data-english="Responsibility drives our daily actions" 
+              data-tamil="பொறுப்புணர்ச்சியே எங்கள் தினசரி செயல்பாடுகளுக்கு
+அடிப்படை.">
+            Responsibility drives our daily actions
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-number">2</div>
+
+      <div class="step-card">
+        <img src="https://t4.ftcdn.net/jpg/05/83/07/25/360_F_583072516_1U8WT01OXZRXAETqXNe2XBhnR8hyzIoS.jpg" 
+             alt="Radical Integrity" 
+             data-english="Radical Integrity" 
+             data-tamil="அடிப்படை நேர்மை">
+        <h3 data-english="Radical Integrity" 
+            data-tamil="அடிப்படை நேர்மை">
+          Radical Integrity
+        </h3>
+        <p data-english="Doing what is right guides every decision we make" 
+           data-tamil="எங்கள் ஒவ்வொரு முடிவும் சரியான வழியிலேயே
+எடுக்கப்படுகிறது.">
+          Doing what is right guides every decision we make
+        </p>
+        <ul>
+          <li data-english="Complete transparency with clients and partners" 
+              data-tamil="வாடிக்கையாளர்கள் மற்றும் கூட்டாளர்களுடன் முழு
+தெளிவுடன் செயல்படுகிறோம்.">
+            Complete transparency with clients and partners
+          </li>
+          <li data-english="Honest communication at all project stages" 
+              data-tamil="திட்டத்தின் எல்லா கட்டங்களிலும் உண்மையான,
+நேர்மையான தகவல்களை பகிர்கிறோம்.">
+            Honest communication at all project stages
+          </li>
+          <li data-english="Ethical practices in planning and execution" 
+              data-tamil="திட்டமிடலும் செயல்படுத்தலும் அனைத்தும்
+நெறிமுறைப்படி நடை பெறும்.">
+            Ethical practices in planning and execution
+          </li>
+          <li data-english="Accountability built into our process" 
+              data-tamil="எங்கள் ஒவ்வொரு செயலிலும் பொறுப்புணர்வு
+அடிப்படையாக உள்ளது.">
+            Accountability built into our process
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+<div class="step">
+  <div class="step-line"></div>
+  <div class="step-number">3</div>
+
+  <div class="step-card">
+    <img src="https://png.pngtree.com/thumb_back/fw800/background/20251108/pngtree-diverse-team-of-architects-and-engineers-collaborating-on-a-digital-blueprint-image_20267622.webp" 
+         alt="People First" 
+         data-english="People First" 
+         data-tamil="மக்கள் முதல்">
+    <h3 data-english="People First" 
+        data-tamil="மக்கள் முதல்">
+      People First
+    </h3>
+    <p data-english="Strong relationships form the foundation of our success" 
+       data-tamil="வலுவான உறவுகள் எங்கள் வெற்றியின் அடித்தளத்தை உருவாக்குகின்றன">
+      Strong relationships form the foundation of our success
+    </p>
+    <ul>
+      <li data-english="Clients are treated with respect and clarity" 
+          data-tamil="வாடிக்கையாளர்களை மரியாதையுடனும் தெளிவுடனும்
+நடத்துகிறோம்.">
+        Clients are treated with respect and clarity
+      </li>
+      <li data-english="Team collaboration is always encouraged" 
+          data-tamil="குழுவினருக்குள் ஒத்துழைப்பை எப்போதும்
+ஊக்குவிக்கிறோம்.">
+        Team collaboration is always encouraged
+      </li>
+      <li data-english="Mutual trust strengthens long-term partnerships" 
+          data-tamil="பரஸ்பர நம்பிக்கை நீண்டகால கூட்டாண்மைகளை வலுப்படுத்துகிறது">
+        Mutual trust strengthens long-term partnerships
+      </li>
+      <li data-english="Culture and values shape better outcomes" 
+          data-tamil="நல்ல கலாச்சாரமும் மதிப்புகளும் சிறந்த முடிவுகளை
+உருவாக்குகின்றன.">
+        Culture and values shape better outcomes
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step">
+  <div class="step-line"></div>
+  <div class="step-number">4</div>
+
+  <div class="step-card">
+    <img src="https://thumbs.dreamstime.com/b/ai-generated-flat-lay-composition-construction-safety-gear-professional-tools-placed-architectural-blueprints-428276685.jpg" 
+         alt="Process Perfection" 
+         data-english="Process Perfection" 
+         data-tamil="செயல்முறை முழுமை">
+    <h3 data-english="Process Perfection" 
+        data-tamil="செயல்முறை முழுமை">
+      Process Perfection
+    </h3>
+    <p data-english="Well-defined systems ensure consistent quality results" 
+       data-tamil="நன்றாக திட்டமிடப்பட்ட வேலை முறை இருப்பதால்,
+ஒவ்வொரு முறையும் தரமான முடிவுகளை பெற
+முடிகிறது.">
+      Well-defined systems ensure consistent quality results
+    </p>
+    <ul>
+      <li data-english="Structured planning before execution begins" 
+          data-tamil="வேலை தொடங்குவதற்குமுன் முன்மையான திட்டமிடல்
+செய்யப்படுகிறது.">
+        Structured planning before execution begins
+      </li>
+      <li data-english="Continuous process improvements on-site" 
+          data-tamil="தளத்தில் தொடர்ந்து வேலை முறைகளை
+மேம்படுத்துகிறோம்.">
+        Continuous process improvements on-site
+      </li>
+      <li data-english="Timelines managed with precision and care" 
+          data-tamil="வேலை காலஅட்டவணை கவனத்துடனும்
+துல்லியமாகவும் நிர்வகிக்கப்படுகிறது.">
+        Timelines managed with precision and care
+      </li>
+      <li data-english="Quality checks at every construction phase" 
+          data-tamil="கட்டுமானத்தின் ஒவ்வொரு நிலையிலும் தரச்
+சோதனைகள் மேற்கொள்ளப்படுகின்றன.">
+        Quality checks at every construction phase
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- STEP 5 -->
+<div class="step">
+  <div class="step-line"></div>
+  <div class="step-number">5</div>
+
+  <div class="step-card">
+    <img src="https://thumbs.dreamstime.com/b/construction-team-having-discussion-work-meeting-group-multiracial-male-female-architects-builders-wearing-safety-hard-400423700.jpg" 
+         alt="Empower One Another" 
+         data-english="Empower One Another" 
+         data-tamil="ஒருவருக்கொருவர் அதிகாரமளிக்கவும்">
+    <h3 data-english="Empower One Another" 
+        data-tamil="ஒருவருக்கொருவர் அதிகாரமளிக்கவும்">
+      Empower One Another
+    </h3>
+    <p data-english="Growth is achieved through shared responsibility and support" 
+       data-tamil="எல்லோரும் பொறுப்புடன் செயல்பட்டு,
+ஒருவருக்கொருவர் உதவினால் முன்னேற்றம்
+கிடைக்கும்.">
+      Growth is achieved through shared responsibility and support
+    </p>
+    <ul>
+      <li data-english="Team members are encouraged to lead" 
+          data-tamil="குழு உறுப்பினர்கள் முனைப்புடன் தலைமைப் பொறுப்பு
+ஏற்க ஊக்குவிக்கப்படுகிறார்கள்.">
+        Team members are encouraged to lead
+      </li>
+      <li data-english="Knowledge and skills are openly shared" 
+          data-tamil="அறிவும் திறன்களும் திறந்த மனதுடன் அனைவரிடமும்
+பகிரப்படுகின்றன.">
+        Knowledge and skills are openly shared
+      </li>
+      <li data-english="Collective goals drive individual excellence" 
+          data-tamil="குழுவின் பொதுஇலக்குகள் ஒவ்வொருவரின் தனிப்பட்ட
+திறமைகளை வெளிக்கொள்ள உதவுகின்றன.">
+        Collective goals drive individual excellence
+      </li>
+      <li data-english="Success is celebrated together" 
+          data-tamil="வெற்றி ஆண்டுதோறும் ஒன்றாகக் கொண்டாடப்படுகிறது.">
+        Success is celebrated together
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- STEP 6 -->
+<div class="step">
+  <div class="step-line"></div>
+  <div class="step-number">6</div>
+
+  <div class="step-card">
+    <img src="https://www.shutterstock.com/image-vector/construction-safety-first-concept-worker-600nw-2636401341.jpg" 
+         alt="Safety & Responsibility" 
+         data-english="Safety & Responsibility" 
+         data-tamil="பாதுகாப்பு & பொறுப்பு">
+    <h3 data-english="Safety & Responsibility" 
+        data-tamil="பாதுகாப்பு & பொறுப்பு">
+      Safety & Responsibility
+    </h3>
+    <p data-english="Safe practices ensure sustainable and reliable construction" 
+       data-tamil="பாதுகாப்பாக வேலை செய்வதால் கட்டுமானம் நீண்ட காலம்
+நிலைத்து, நம்பிக்கையுடன் இருக்கும்.">
+      Safe practices ensure sustainable and reliable construction
+    </p>
+    <ul>
+      <li data-english="Safety standards followed without exception" 
+          data-tamil="பாதுகாப்பு விதிமுறைகள் எந்த விதிவிலக்கும் இல்லாமல்
+கடைப்பிடிக்கப்படுகின்றன.">
+        Safety standards followed without exception
+      </li>
+      <li data-english="Responsible material and site management" 
+          data-tamil="பொருட்கள் மற்றும் பணித்தள மேற்பார்வை பொறுப்புடன்
+மேற்கொள்ளப்படுகிறது.">
+        Responsible material and site management
+      </li>
+      <li data-english="Protection of people, property, and environment" 
+          data-tamil="மனிதர்கள், சொத்துகள் மற்றும் சுற்றுச்சூழல்
+பாதுகாக்கப்படுகின்றன.">
+        Protection of people, property, and environment
+      </li>
+      <li data-english="Long-term durability always prioritized" 
+          data-tamil="நீண்ட காலம் நிலைக்கும் கட்டுமானமே எப்போதும் எங்கள்
+முன்னுரிமை.">
+        Long-term durability always prioritized
+      </li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<section class="team-section">
+  <h2 data-english="Meet The Team" 
+      data-tamil="குழுவை சந்திக்கவும்">
+    Meet The Team
+  </h2>
+  
+  <p class="team-intro" 
+     data-english="Our leadership and technical team bring together years of experience in construction management, engineering, and on-site execution." 
+     data-tamil="எங்கள் தலைமை மற்றும் தொழில்நுட்ப குழு கட்டுமான மேலாண்மை, பொறியியல் மற்றும் தள செயலாக்கத்தில் ஆண்டுகளான அனுபவத்தை ஒன்றிணைக்கிறது.">
+    Our leadership and technical team bring together years of experience in construction management, engineering, and on-site execution.
+  </p>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdrdKEavfsLr71LLpjhHSORXJE4iGIjJIwmg&s" 
+           alt="Founder / Director" 
+           data-english="Founder / Director" 
+           data-tamil="நிறுவனர் / இயக்குநர்">
+      <h4 data-english="Founder / Director" 
+          data-tamil="நிறுவனர் / இயக்குநர்">
+        Founder / Director
+      </h4>
+      <p data-english="Visionary leader with hands-on experience in residential and commercial construction, guiding projects with clarity and integrity." 
+         data-tamil="வீட்டுவசதி மற்றும் வணிக கட்டுமானத்தில் நேரடி அனுபவம் கொண்ட பார்வைத் தலைவர், தெளிவு மற்றும் நேர்மையுடன் திட்டங்களை வழிநடத்துகிறார்.">
+        Visionary leader with hands-on experience in residential and commercial construction, guiding projects with clarity and integrity.
+      </p>
+    </div>
+
+    <div class="team-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdrdKEavfsLr71LLpjhHSORXJE4iGIjJIwmg&s" 
+           alt="Project Manager" 
+           data-english="Project Manager" 
+           data-tamil="திட்ட மேலாளர்">
+      <h4 data-english="Project Manager" 
+          data-tamil="திட்ட மேலாளர்">
+        Project Manager
+      </h4>
+      <p data-english="Oversees planning, scheduling, and execution to ensure projects are delivered on time and within budget." 
+         data-tamil="திட்டங்கள் சரியான நேரத்திலும் பட்ஜெட்டுக்குள் வழங்கப்படுவதை உறுதி செய்ய திட்டமிடல், காலவரிசை மற்றும் செயல்படுத்தலை மேற்பார்வையிடுகிறார்.">
+        Oversees planning, scheduling, and execution to ensure projects are delivered on time and within budget.
+      </p>
+    </div>
+
+    <div class="team-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdrdKEavfsLr71LLpjhHSORXJE4iGIjJIwmg&s" 
+           alt="Engineering Team" 
+           data-english="Engineering Team" 
+           data-tamil="பொறியியல் குழு">
+      <h4 data-english="Engineering Team" 
+          data-tamil="பொறியியல் குழு">
+        Engineering Team
+      </h4>
+      <p data-english="Skilled architects and engineers ensuring structural safety, efficiency, and compliance with standards." 
+         data-tamil="கட்டமைப்பு பாதுகாப்பு, செயல்திறன் மற்றும் தரங்களுடன் இணக்கத்தை உறுதி செய்யும் திறமையான கட்டிடக் கலைஞர்கள் மற்றும் பொறியாளர்கள்.">
+        Skilled architects and engineers ensuring structural safety, efficiency, and compliance with standards.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="why-us">
+  <div class="why-us-inner">
+
+    <div class="why-us-text">
+      <h2 data-english="Why Choose Lakshmiharam Builders" 
+          data-tamil="ஏன் லக்ஷ்மிஹரம் பில்டர்ஸை தேர்வு செய்ய வேண்டும்">
+        Why Choose Lakshmiharam Builders
+      </h2>
+
+      <ul>
+        <li data-english="Proven experience across residential, commercial, and turnkey projects" 
+            data-tamil="வீட்டுவசதி, வணிக மற்றும் டர்ன்கி திட்டங்களில் நிரூபிக்கப்பட்ட அனுபவம்">
+          Proven experience across residential, commercial, and turnkey projects
+        </li>
+        <li data-english="Licensed, insured, and compliant with industry standards" 
+            data-tamil="உரிமம் பெற்றது, காப்பீடு செய்யப்பட்டது மற்றும் தொழில் தரநிலைகளுடன் இணக்கமானது">
+          Licensed, insured, and compliant with industry standards
+        </li>
+        <li data-english="Transparent pricing and clear communication" 
+            data-tamil="வெளிப்படையான விலை நிர்ணயம் மற்றும் தெளிவான தொடர்பு">
+          Transparent pricing and clear communication
+        </li>
+        <li data-english="Commitment to safety, quality, and timely delivery" 
+            data-tamil="பாதுகாப்பு, தரம் மற்றும் சரியான நேரத்தில் விநியோகத்திற்கான அர்ப்பணிப்பு">
+          Commitment to safety, quality, and timely delivery
+        </li>
+        <li data-english="Client-focused approach with long-term support" 
+            data-tamil="நீண்ட கால ஆதரவுடன் வாடிக்கையாளர் மையமான அணுகுமுறை">
+          Client-focused approach with long-term support
+        </li>
+      </ul>
+    </div>
+
+    <div class="why-us-video">
+      <video autoplay muted loop playsinline>
+        <source src="3D.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+</section>
+
+<section class="footer-cta" data-lang="en">
+  <div class="footer-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="footer-left">
+      <div class="footer-icon">
+        <i class="fa-solid fa-bell"></i>
+      </div>
+
+      <h2
+        data-english="You Dream It, We Design It!"
+        data-tamil="“கனவுகள் உங்கள் வசம்...
+வடிவமைப்பு எங்கள் பொறுப்பு!”">
+        You Dream It, We Design It!
+      </h2>
+
+      <p
+        data-english="Our expert team transforms your vision into reality with precision and creativity."
+        data-tamil="உங்கள் கனவுக்கு துல்லியமும்
+படைப்பாற்றலும் சேர்த்து, அதை நிஜமாக்கும் எங்கள்
+நிபுணர் குழு">
+        Our expert team transforms your vision into reality with precision and creativity.
+      </p>
+
+      <div class="footer-social">
+        <a href="https://www.instagram.com/er_babu.m/?hl=en">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/918695332255">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://www.youtube.com/@lakshmiharambuilders">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a href="mailto:lakshmiharam.builders@gmail.com">
+          <i class="fa-solid fa-at"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT LOGO -->
+    <div class="footer-map">
+  <iframe
+    src="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed"
+    width="100%"
+    height="260"
+    style="border:0; border-radius:14px;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+  </div>
+
+  <!-- BOTTOM INFO -->
+  <div class="footer-bottom">
+
+    <!-- PHONE -->
+    <div class="footer-item">
+      <a href="tel:+918695332255">
+        <i class="fa-solid fa-phone"></i>
+        <p
+          data-english="+91 8144442255 <br> +91 86953 32255" 
+          data-tamil="+91 8144442255 <br> +91 86953 32255">
+          +91 86953 32255, +91 8144442255
+        </p>
+      </a>
+    </div>
+
+    <div class="footer-divider">
+      <span class="divider-anim"></span>
+    </div>
+
+    <!-- LOCATION -->
+    <div class="footer-item">
+      <a href="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed" target="_blank">
+        <i class="fa-solid fa-house"></i>
+        <p
+          data-english="Virudhunagar"
+          data-tamil="விருதுநகர்">
+          Virudhunagar
+        </p>
+      </a>
+    </div>
+
+    <div class="footer-divider">
+      <span class="divider-anim"></span>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div class="footer-item">
+      <a href="https://www.instagram.com/er_babu.m/?hl=en" target="_blank">
+        <i class="fa-brands fa-instagram"></i>
+        <p
+          data-english="@lakshmiharam_constructions"
+          data-tamil="@lakshmiharam_constructions">
+          @lakshmiharam_constructions
+        </p>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- KEYWORDS -->
+  <div class="footer-keywords">
+    <h4
+      data-english="TOP SEARCH KEYWORDS"
+      data-tamil="முக்கிய தேடல் சொற்கள்">
+      TOP SEARCH KEYWORDS
+    </h4>
+
+    <div class="keyword-grid">
+  <ul>
+    <li
+      data-english="Best builders in Virudhunagar"
+      data-tamil="விருதுநகரின் நம்பகமான மற்றும் சிறந்த கட்டுமான
+நிறுவனம்">
+      Best builders in Virudhunagar
+    </li>
+    <li
+      data-english="Steel building construction company in Virudhunagar"
+      data-tamil="விருதுநகரில் தரமான ஸ்டீல் கட்டிட தீர்வுகள் வழங்கும்
+நிறுவனம்">
+      Steel building construction company in Virudhunagar
+    </li>
+    <li
+      data-english="Construction company in Virudhunagar"
+      data-tamil="வீடு மற்றும் வணிக கட்டுமானத்தில் முன்னணி —
+விருதுநகர்">
+      Construction company in Virudhunagar
+    </li>
+    <li
+      data-english="Top 20 construction companies in Virudhunagar"
+      data-tamil="விருதுநகரின் முன்னணி 20 கட்டுமான நிறுவனங்களில்
+ஒன்று">
+      Top 20 construction companies in Virudhunagar
+    </li>
+  </ul>
+
+  <ul>
+    <li
+      data-english="Builders in Virudhunagar"
+      data-tamil="விருதுநகரில் நம்பகமான கட்டுமான சேவைகள்">
+      Builders in Virudhunagar
+    </li>
+    <li
+      data-english="Building construction company in Virudhunagar"
+      data-tamil="விருதுநகரில் அனுபவமிக்க கட்டிடக் கட்டுமான நிறுவனம்">
+      Building construction company in Virudhunagar
+    </li>
+    <li
+      data-english="Top construction companies in Virudhunagar"
+      data-tamil="விருதுநகரின் சிறந்த மற்றும் முன்னணி கட்டுமான நிறுவனர்கள்">
+      Top construction companies in Virudhunagar
+    </li>
+  </ul>
+
+  <ul>
+    <li
+      data-english="Construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் நம்பிக்கைக்குரிய உயர்தர வீடு கட்டுமான சேவைகள்">
+      Construction companies in Virudhunagar
+    </li>
+    <li
+      data-english="Home builders in Virudhunagar"
+      data-tamil="விருதுநகரில் தரமும் அழகும் கொண்ட கட்டுமான தீர்வுகள்">
+      Home builders in Virudhunagar
+    </li>
+    <li
+      data-english="Premium Builder in Virudhunagar"
+      data-tamil="விருதுநகரில் உயர்தர கட்டுமான நிறுவனம்">
+      Premium Builder in Virudhunagar
+    </li>
+    <li
+      data-english="Leading builders in Virudhunagar"
+      data-tamil="விருதுநகரில் முன்னணி பில்டர்கள்">
+      Leading builders in Virudhunagar
+    </li>
+    <li
+      data-english="Leading construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் முன்னணி கட்டுமான நிறுவனங்கள்">
+      Leading construction companies in Virudhunagar
+    </li>
+  </ul>
+
+  <ul>
+    <li
+      data-english="Best construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் சிறந்த கட்டுமான நிறுவனங்கள்">
+      Best construction companies in Virudhunagar
+    </li>
+    <li
+      data-english="Home builders and developers in Virudhunagar"
+      data-tamil="விருதுநகரில் வீடு கட்டுபவர்கள் மற்றும் டெவலப்பர்கள்">
+      Home builders and developers in Virudhunagar
+    </li>
+    <li
+      data-english="House Builders in Virudhunagar"
+      data-tamil="விருதுநகரில் வீடு கட்டும் பில்டர்கள்">
+      House Builders in Virudhunagar
+    </li>
+    <li
+      data-english="Construction builders in Virudhunagar"
+      data-tamil="விருதுநகரில் கட்டுமான பில்டர்கள்">
+      Construction builders in Virudhunagar
+    </li>
+    <li
+      data-english="Top 10 construction companies in Virudhunagar"
+      data-tamil="விருதுநகரில் சிறந்த 10 கட்டுமான நிறுவனங்கள்">
+      Top 10 construction companies in Virudhunagar
+    </li>
+  </ul>
+</div>
+
+  
+  </div>
+
+  <!-- BRAND STRIP -->
+  <div class="footer-brand">
+    <span class="brand-line">
+      <span class="brand-anim"></span>
+    </span>
+
+    <h2
+      data-english="LAKSHMIHARAM CONSTRUCTIONS"
+      data-tamil="லட்சுமிஹரம் கன்ஸ்ட்ரக்ஷன்ஸ்">
+      LAKSHMIHARAM <strong>CONSTRUCTIONS</strong>
+    </h2>
+
+    <span class="brand-line">
+      <span class="brand-anim"></span>
+    </span>
+  </div>
+
+  <!-- COPYRIGHT -->
+  <div class="footer-copy"
+       data-english="Copyright © 2025 Lakshmiharam Constructions By Rohil Technologies"
+       data-tamil="பதிப்புரிமை © 2025 லட்சுமிஹரம் கன்ஸ்ட்ரக்ஷன்ஸ் – ரோஹில் டெக்னாலஜீஸ்">
+    Copyright © 2025 Lakshmiharam Constructions By
+    <a href="https://www.rohiltechnologies.com/">Rohil Technologies</a>
+  </div>
+</section>
+<!-- WhatsApp Button -->
+<a href="https://wa.me/918144442255" class="contact-fab whatsapp" target="_blank">
+  <img src="whatsapp.png" alt="WhatsApp">
+</a>
+
+<!-- Call Button -->
+<a href="tel:+918144442255" class="contact-fab call">
+  <img src="contact.png" alt="Contact">
+</a>
+
+<script>
+// Language Management
+let currentLanguage = 'en';
+
+function switchLanguage(lang) {
+  currentLanguage = lang;
+  
+  // Update all elements with language data attributes
+  document.querySelectorAll('[data-english], [data-tamil]').forEach(element => {
+    if (lang === 'en' && element.getAttribute('data-english')) {
+      element.innerHTML = element.getAttribute('data-english');
+    }
+    if (lang === 'ta' && element.getAttribute('data-tamil')) {
+      element.innerHTML = element.getAttribute('data-tamil');
+    }
+  });
+
+  // Update language button states
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if ((lang === 'en' && btn.textContent === 'English') || 
+        (lang === 'ta' && btn.textContent === 'தமிழ்')) {
+      btn.classList.add('active');
+    }
+  });
+
+  localStorage.setItem('preferredLanguage', lang);
+}
+
+// On page load
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLanguage = localStorage.getItem('preferredLanguage');
+  if (savedLanguage) {
+    switchLanguage(savedLanguage);
+  }
+});
+</script>
+
+<script>
+const toggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector(".mobile-menu");
+const links = document.querySelectorAll(".mobile-menu a");
+
+// FIX: Add null check
+if (toggle && mobileMenu) {
+  let menuOpen = false;
+
+  toggle.addEventListener("click", () => {
+    if (!menuOpen) {
+      gsap.to(mobileMenu, {
+        x: "0%",
+        duration: 0.9,
+        ease: "power4.out"
+      });
+
+      if (links.length > 0) {
+        gsap.fromTo(
+          links,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            delay: 0.3,
+            duration: 0.8,
+            ease: "power3.out"
+          }
+        );
+      }
+    } else {
+      gsap.to(mobileMenu, {
+        x: "-100%",
+        duration: 0.7,
+        ease: "power4.in"
+      });
+    }
+
+    menuOpen = !menuOpen;
+  });
+
+  /* close on click */
+  if (links.length > 0) {
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        gsap.to(mobileMenu, {
+          x: "-100%",
+          duration: 0.7,
+          ease: "power4.in"
+        });
+        menuOpen = false;
+      });
+    });
+  }
+}
+/*--------------------------------------------------------------------*/
+  gsap.registerPlugin(ScrollTrigger);
+
+const heroTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top 85%",
+    toggleActions: "play pause play pause"
+  }
+});
+
+/* RESET */
+gsap.set(".hero-bg", { scale: 1.15 });
+gsap.set(".corner.tl .h", { width: "0%" });
+gsap.set(".corner.tl .v", { height: "0%" });
+gsap.set(".corner.br .h", { width: "0%" });
+gsap.set(".corner.br .v", { height: "0%" });
+
+heroTL
+.to(".hero-bg",{ scale:1, duration:2, ease:"power2.out" })
+.to(".corner.tl .h",{ width:"120px", duration:0.8 }, "-=1.4")
+.to(".corner.tl .v",{ height:"120px", duration:0.8 }, "-=0.6")
+.to(".corner.br .h",{ width:"120px", duration:0.8 }, "-=0.9")
+.to(".corner.br .v",{ height:"120px", duration:0.8 }, "-=0.6")
+.to("h1",{ opacity:1, y:0, duration:0.9 }, "-=0.6")
+.to(".hero p",{ opacity:1, y:0, duration:0.7 }, "-=0.4");
+
+
+/* ================= HERO ================= */
+gsap.from(".about-hero-wrap > *", {
+  y: 60,
+  opacity: 0,
+  duration: 1.1,
+  ease: "power4.out",
+  stagger: 0.2
+});
+
+/* ================= TEAM ================= */
+gsap.from(".team-section h2, .team-intro", {
+  y: 50,
+  opacity: 0,
+  duration: 1,
+  stagger: 0.2,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".team-section",
+    start: "top 80%"
+  }
+});
+
+gsap.utils.toArray(".team-card").forEach((card, i) => {
+
+  gsap.fromTo(card,
+    {
+      y: 140,
+      rotateY: 15,
+      opacity: 0
+    },
+    {
+      y: 0,
+      rotateY: 0,
+      opacity: 1,
+      duration: 1.4,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%"
+      }
+    }
+  );
+
+  gsap.from(card.querySelectorAll("h4, p"), {
+    y: 30,
+    opacity: 0,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: card,
+      start: "top 80%"
+    }
+  });
+});
+
+/* ================= WHY US ================= */
+gsap.from(".why-us li", {
+  x: -100,
+  opacity: 0,
+  duration: 0.7,
+  stagger: 0.15,
+  ease: "back.out(1.8)",
+  scrollTrigger: {
+    trigger: ".why-us ul",
+    start: "top 85%"
+  }
+});
+
+gsap.from(".why-us-video", {
+  x: 80,
+  opacity: 0,
+  duration: 1.5,
+  ease: "power3.out",
+  scrollTrigger:{
+    trigger: ".why-us",
+    start: "top 80%"
+  }
+});
+
+
+gsap.from(".about-title", {
+  y: 40,
+  opacity: 0,
+  duration: 1,
+  ease: "power3.out"
+});
+
+gsap.from(".about-desc", {
+  y: 30,
+  opacity: 0,
+  duration: 0.8,
+  delay: 0.2
+});
+
+gsap.from(".about-image img", {
+  y: 50,
+  opacity: 0,
+  duration: 1,
+  delay: 0.4
+});
+
+gsap.from(".mv-block", {
+  x: 60,
+  opacity: 0,
+  duration: 0.9,
+  stagger: 0.25,
+  delay: 0.6,
+  ease: "power3.out"
+});
+  document.querySelectorAll('.mv-block h3').forEach(h3 => {
+    h3.addEventListener('click', () => {
+      h3.classList.add('zoom');
+
+      setTimeout(() => {
+        h3.classList.remove('zoom');
+      }, 200);
+    });
+  });
+
+  gsap.utils.toArray(".mv-block .line span").forEach(line => {
+    gsap.fromTo(
+      line,
+      { x: "-100%" },
+      {
+        x: "100%",
+        duration: 1.8,
+        ease: "none",
+        repeat: -1
+      }
+    );
+  });
+  gsap.utils.toArray(".mv-block .line span").forEach(line => {
+  gsap.fromTo(
+    line,
+    { x: "-100%" },
+    {
+      x: "100%",
+      duration: 1.8,
+      ease: "none",
+      repeat: -1,
+      delay: Math.random() * 1.5
+    }
+  );
+});
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* ================= ULTRA LUXURY STORY ================= */
+
+const storyTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".about-content",
+    start: "top 80%",
+    toggleActions: "play none none reverse"
+  }
+});
+
+/* 1️⃣ Title – slow authority reveal */
+storyTL.from(".about-tit h2", {
+  y: 24,
+  opacity: 0,
+  duration: 1.4,
+  ease: "power2.out"
+});
+
+/* 2️⃣ Vertical gold line – calm grow */
+storyTL.to(".story-line", {
+  height: "80%",
+  duration: 1.2,
+  ease: "power1.out"
+}, "-=0.9");
+
+/* 3️⃣ Paragraphs – luxury reading flow */
+storyTL.from(".about-tit p", {
+  y: 20,
+  opacity: 0,
+  duration: 1.3,
+  stagger: 0.55,
+  ease: "power1.out"
+}, "-=0.6");
+</script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* SECTION INTRO */
+gsap.from(".home-steps h2, .home-steps .intro", {
+  opacity: 0,
+  y: 60,
+  duration: 1.8,
+  ease: "power4.out",
+  stagger: 0.2,
+  scrollTrigger: {
+    trigger: ".home-steps",
+    start: "top 75%",
+  }
+});
+
+/* EACH STEP ANIMATION */
+document.querySelectorAll(".step").forEach((step, i) => {
+
+  const direction = i % 2 === 0 ? -80 : 80;
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: step,
+      start: "top 80%",
+      toggleActions: "play none none none"
+    }
+  });
+
+  /* STEP NUMBER */
+  tl.from(step.querySelector(".step-number"), {
+    scale: 0,
+    opacity: 0,
+    duration: 0.6,
+    ease: "back.out(1.7)"
+  });
+
+  /* IMAGE REVEAL */
+  tl.from(step.querySelector("img"), {
+    clipPath: "inset(0 0 100% 0)",
+    opacity: 0,
+    duration: 1.4,
+    ease: "power3.out"
+  }, "-=0.2");
+
+  /* CARD CONTENT */
+  tl.from(step.querySelectorAll("h3, p, li"), {
+    opacity: 0,
+    x: direction,
+    duration: 1.2,
+    stagger: 0.12,
+    ease: "power3.out"
+  }, "-=1");
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* 🔔 Bell ring */
+  if (document.querySelector(".footer-icon i")) {
+    gsap.fromTo(".footer-icon i",
+      { rotation: -15 },
+      {
+        rotation: 15,
+        duration: 0.6,
+        ease: "power1.inOut",
+        repeat: -1,
+        yoyo: true,
+        transformOrigin: "50% 0%"
+      }
+    );
+  }
+
+  /* LEFT CONTENT */
+  if (document.querySelector(".footer-cta")) {
+    gsap.fromTo(
+      ".footer-left h2, .footer-left p, .footer-social a",
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".footer-cta",
+          start: "top 80%",
+        }
+      }
+    );
+  }
+
+  /* BOTTOM ITEMS */
+  if (document.querySelector(".footer-bottom")) {
+    gsap.from(".footer-item", {
+      scrollTrigger: {
+        trigger: ".footer-bottom",
+        start: "top 85%",
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power2.out"
+    });
+  }
+
+  /* KEYWORDS */
+  if (document.querySelector(".footer-keywords")) {
+    gsap.from(".keyword-grid li", {
+      scrollTrigger: {
+        trigger: ".footer-keywords",
+        start: "top 85%",
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: "power1.out"
+    });
+  }
+
+  /* BRAND TITLE */
+  if (document.querySelector(".footer-brand h2")) {
+    gsap.from(".footer-brand h2", {
+      scrollTrigger: {
+        trigger: ".footer-brand",
+        start: "top 90%",
+      },
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.8,
+      ease: "back.out(1.7)"
+    });
+  }
+
+  /* HORIZONTAL BRAND LINE */
+  if (document.querySelector(".brand-anim")) {
+    gsap.to(".brand-anim", {
+      xPercent: 200,
+      duration: 2.6,
+      ease: "none",
+      repeat: -1
+    });
+  }
+
+  /* VERTICAL DIVIDER LINE */
+  if (document.querySelector(".divider-anim")) {
+    gsap.to(".divider-anim", {
+      yPercent: 200,
+      duration: 2.2,
+      ease: "none",
+      repeat: -1
+    });
+  }
+
+});
+</script>
+</strong>
+</body>
+</html>
