@@ -190,8 +190,8 @@ p{
     rgba(255,255,255,1) 100%
   );
 
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 
   z-index: 1;
   pointer-events: none;
@@ -310,6 +310,7 @@ p{
   height: 100%;
   width: 80px;
   background: rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   z-index: 3;
 
@@ -395,8 +396,8 @@ p{
     rgba(0,0,0,0.25)
   );
 
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 
   align-items: center;
   justify-content: center;
@@ -462,6 +463,7 @@ p{
   position: relative;
   padding: 100px 20px;
   background: rgba(255, 255, 255, 0.88); /* 👈 white transparent */
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);           /* subtle premium look */
 }
 
@@ -1126,6 +1128,7 @@ p{
   height: 100%;
   width: 80px;
   background: rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   z-index: 3;
 
@@ -1217,8 +1220,8 @@ p{
     rgba(0,0,0,0.25)
   );
 
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 
   align-items: center;
   justify-content: center;
@@ -1359,6 +1362,7 @@ p{
   height: 100%;
   width: 35px;
   background: rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   z-index: 3;
 
@@ -1444,8 +1448,8 @@ p{
     rgba(0,0,0,0.25)
   );
 
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 
   align-items: center;
   justify-content: center;
@@ -1682,6 +1686,7 @@ html, body {
   display: flex;
   gap: 8px;
   background: rgba(0,0,0,0.7);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   padding: 6px 10px;
   border-radius: 30px;
@@ -1768,6 +1773,7 @@ html, body {
   display: flex;
   gap: 8px;
   background: rgba(0,0,0,0.7);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   padding: 6px 10px;
   border-radius: 30px;
@@ -2291,7 +2297,7 @@ html, body {
 
   <!-- HERO LOGO -->
   <div class="hero-logo">
-    <img src="images/logo.png" loading="lazy"
+    <img src="images/logo.png" loading="lazy" decoding="async"
          alt="Lakshmiharam Builders Logo"
          data-english="Lakshmiharam Builders Logo"
          data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் லோகோ">
@@ -2412,7 +2418,7 @@ html, body {
 <!-- ================= PROJECTS VIDEO SHOWCASE ================= -->
 <section class="projects-showcase">
   <!-- Decorative crane -->
-  <img src="images/project/hook.jpg" loading="lazy" alt="Construction project showcase by Lakshmiharam Builders" class="projects-crane">
+  <img src="images/project/hook.jpg" loading="lazy" decoding="async" alt="Construction project showcase by Lakshmiharam Builders" class="projects-crane">
   
   <div class="showcase-intro">
     <h2 data-english="Ongoing Construction Projects" data-tamil="நடைபெற்று வரும் கட்டுமான திட்டங்கள்">
@@ -2738,7 +2744,7 @@ html, body {
 
     <!-- LOCATION -->
     <div class="footer-item">
-      <a href="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed" target="_blank">
+      <a href="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed" target="_blank" rel="noopener noreferrer">
         <i class="fa-solid fa-house"></i>
         <p
           data-english="Virudhunagar"
@@ -2754,7 +2760,7 @@ html, body {
 
     <!-- INSTAGRAM -->
     <div class="footer-item">
-      <a href="https://www.instagram.com/er_babu.m/?hl=en" target="_blank">
+      <a href="https://www.instagram.com/er_babu.m/?hl=en" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-instagram"></i>
         <p
           data-english="@lakshmiharam_constructions"
@@ -2896,13 +2902,13 @@ html, body {
   </div>
 </section>
 <!-- WhatsApp Button -->
-<a href="https://wa.me/918144442255" class="contact-fab whatsapp" target="_blank">
-  <img src="images/whatsapp.png" loading="lazy" alt="Chat with Lakshmiharam Builders on WhatsApp">
+<a href="https://wa.me/918144442255" class="contact-fab whatsapp" target="_blank" rel="noopener noreferrer">
+  <img src="images/whatsapp.png" loading="lazy" decoding="async" alt="Chat with Lakshmiharam Builders on WhatsApp">
 </a>
 
 <!-- Call Button -->
 <a href="tel:+918144442255" class="contact-fab call">
-  <img src="images/contact.png" loading="lazy" alt="Call Lakshmiharam Builders">
+  <img src="images/contact.png" loading="lazy" decoding="async" alt="Call Lakshmiharam Builders">
 </a>
 
 <!---------------------------------------------------------------------------------------------------------------->

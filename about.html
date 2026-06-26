@@ -48,6 +48,7 @@ body {
   display: flex;
   gap: 8px;
   background: rgba(0,0,0,0.7);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   padding: 6px 10px;
   border-radius: 30px;
@@ -244,8 +245,8 @@ p{
     rgba(255,255,255,1) 100%
   );
 
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 
   z-index: 1;
   pointer-events: none;
@@ -403,6 +404,7 @@ p{
   height: 100%;
   width: 35px;
   background: rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   z-index: 3;
 
@@ -488,8 +490,8 @@ p{
     rgba(0,0,0,0.25)
   );
 
-  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 
   align-items: center;
   justify-content: center;
@@ -551,14 +553,6 @@ p{
   }
 }
 
-/*-------------------------------------------------*/
-/*-------------------------------------------------*/
-/*-------------------------------------------------*/
-/*-------------------------------------------------*/
-/*-------------------------------------------------*/
-/*-------------------------------------------------*/
-/*-------------------------------------------------*/
-/*-------------------------------------------------*/
 /*-------------------------------------------------*/
 .about-hero{
   padding:140px 10% 120px;
@@ -1391,8 +1385,9 @@ section {
     #f2c94c 38%,      /* BLACK */
     #f2c94c 100%
   );
-  background-clip: text;
+  
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1405,8 +1400,8 @@ section {
     #f2c94c 45%,
     #f2c94c 100%
   );
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .mv-block h2 i{
@@ -2611,7 +2606,7 @@ section {
 
   <!-- HERO LOGO -->
 <div class="hero-logo">
-  <img src="images/logo.png" loading="lazy" alt="Lakshmiharam Builders Logo" 
+  <img src="images/logo.png" alt="Lakshmiharam Builders Logo" loading="lazy" decoding="async"
        data-english="Lakshmiharam Builders Logo"
        data-tamil="லக்ஷ்மிஹரம் பில்டர்ஸ் லோகோ">
 </div>
@@ -2696,7 +2691,7 @@ section {
 
 <section class="about-content">
  <!-- Decorative crane -->
-  <img src="images/about/crane.png" loading="lazy" alt="Lakshmiharam Builders construction crane at work in Virudhunagar" class="about-crane">
+  <img src="images/about/crane.png" alt="Lakshmiharam Builders construction crane at work in Virudhunagar" loading="lazy" decoding="async" class="about-crane">
 
   <div class="about-block">
     <div class="about-tit">
@@ -2778,7 +2773,7 @@ section {
       </p>
 
       <div class="about-image">
-        <img src="images/about/mission.jpg" loading="lazy"
+        <img src="images/about/mission.jpg" loading="lazy" decoding="async"
              alt="Lakshmiharam Builders - Our Mission, Vision, and Values" 
              data-english="Mission Vision Values" 
              data-tamil="குறிக்கோள் பார்வை மதிப்புகள்">
@@ -2875,7 +2870,7 @@ section {
       <div class="step-number">1</div>
 
       <div class="step-card">
-        <img src="images/about/care.jpg" loading="lazy"
+        <img src="images/about/care.jpg" loading="lazy" decoding="async"
              alt="We Give a Care" 
              data-english="We Give a Care" 
              data-tamil="நாங்கள் அக்கறை காட்டுகிறோம்">
@@ -2917,7 +2912,7 @@ section {
       <div class="step-number">2</div>
 
       <div class="step-card">
-        <img src="images/about/hand.jpg" loading="lazy"
+        <img src="images/about/hand.jpg" loading="lazy" decoding="async"
              alt="Radical Integrity" 
              data-english="Radical Integrity" 
              data-tamil="அடிப்படை நேர்மை">
@@ -2961,7 +2956,7 @@ section {
   <div class="step-number">3</div>
 
   <div class="step-card">
-    <img src="images/about/people.webp" loading="lazy"
+    <img src="images/about/people.webp" loading="lazy" decoding="async"
          alt="People First" 
          data-english="People First" 
          data-tamil="மக்கள் முதல்">
@@ -3003,7 +2998,7 @@ section {
   <div class="step-number">4</div>
 
   <div class="step-card">
-    <img src="images/about/process.webp" loading="lazy"
+    <img src="images/about/process.webp" loading="lazy" decoding="async"
          alt="Process Perfection" 
          data-english="Process Perfection" 
          data-tamil="செயல்முறை முழுமை">
@@ -3047,7 +3042,7 @@ section {
   <div class="step-number">5</div>
 
   <div class="step-card">
-    <img src="images/about/empower.webp" loading="lazy"
+    <img src="images/about/empower.webp" loading="lazy" decoding="async"
          alt="Empower One Another" 
          data-english="Empower One Another" 
          data-tamil="ஒருவருக்கொருவர் அதிகாரமளிக்கவும்">
@@ -3090,7 +3085,7 @@ section {
   <div class="step-number">6</div>
 
   <div class="step-card">
-    <img src="images/about/safety.webp" loading="lazy"
+    <img src="images/about/safety.webp" loading="lazy" decoding="async"
          alt="Safety & Responsibility" 
          data-english="Safety & Responsibility" 
          data-tamil="பாதுகாப்பு & பொறுப்பு">
@@ -3452,7 +3447,7 @@ section {
 
     <!-- LOCATION -->
     <div class="footer-item">
-      <a href="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed" target="_blank">
+      <a href="https://www.google.com/maps?q=3/2,%20Aani%20Muthu%20Pillaiyar%20Kovil%20Street,%20Sivagamipuram,%20Virudhunagar,%20Tamil%20Nadu%20626001&output=embed" target="_blank" rel="noopener noreferrer">
         <i class="fa-solid fa-house"></i>
         <p
           data-english="Virudhunagar"
@@ -3468,7 +3463,7 @@ section {
 
     <!-- INSTAGRAM -->
     <div class="footer-item">
-      <a href="https://www.instagram.com/er_babu.m/?hl=en" target="_blank">
+      <a href="https://www.instagram.com/er_babu.m/?hl=en" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-instagram"></i>
         <p
           data-english="@lakshmiharam_constructions"
@@ -3610,13 +3605,13 @@ section {
   </div>
 </section>
 <!-- WhatsApp Button -->
-<a href="https://wa.me/918144442255" class="contact-fab whatsapp" target="_blank">
-  <img src="images/whatsapp.png" loading="lazy" alt="WhatsApp">
+<a href="https://wa.me/918144442255" class="contact-fab whatsapp" target="_blank" rel="noopener noreferrer">
+  <img src="images/whatsapp.png" loading="lazy" decoding="async" alt="WhatsApp">
 </a>
 
 <!-- Call Button -->
 <a href="tel:+918144442255" class="contact-fab call">
-  <img src="images/contact.png" loading="lazy" alt="Contact">
+  <img src="images/contact.png" loading="lazy" decoding="async" alt="Contact">
 </a>
 
 <script>
